@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import 'src/view/auth/login_view.dart';
 import 'src/view/auth/signup_view.dart';
 import 'src/view/home/home_view.dart';
+import 'src/view/news/news_detail_view.dart';
+import 'src/view/news/news_learning_view.dart';
 import 'src/view/news/news_list_view.dart';
+import 'src/view/test/common/feedback_view.dart';
+import 'src/view/test/common/loading_view.dart';
 import 'src/view/test/task1/task1_view.dart';
 import 'src/view/test/task2/task2_view.dart';
 import 'src/view/test/task3/task3_view.dart';
@@ -42,7 +47,11 @@ class MyApp extends StatelessWidget {
         '/': (context) => LoginView(),
         '/signup': (context) => SignupView(),
         '/home': (context) => HomeView(),
-        // '/news': (context) => NewsListView(),
+        '/news': (context) => NewsListView(),
+        '/news_detail': (context) => NewsDetailView(),
+        '/loading': (context) => LoadingView(),
+        '/news_learning': (context) => NewsLearningView(),
+        '/feedback': (context) => FeedbackView(),
         '/test': (context) => TaskSelectionView(),
         '/user': (context) => UserView(),
         '/profile': (context) => ProfileView(),
