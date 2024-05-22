@@ -19,11 +19,7 @@ class _Task4ViewState extends State<Task4View> {
   }
 
   void _submitAnswer() {
-    Navigator.of(context).pushNamed('/loading', arguments: {
-      'onComplete': (feedback) {
-        Navigator.of(context).pushNamed('/feedback', arguments: feedback);
-      },
-    });
+    Navigator.of(context).pushNamed('/loading');
   }
 
   @override
@@ -34,7 +30,7 @@ class _Task4ViewState extends State<Task4View> {
       ),
       body: Stepper(
         currentStep: _currentStep,
-        onStepContinue: _nextStep,
+        onStepContinue: _currentStep == 2 ? null : _nextStep,
         steps: [
           Step(
             title: Text("Microphone Test"),
@@ -58,6 +54,18 @@ class _Task4ViewState extends State<Task4View> {
             isActive: _currentStep == 2,
           ),
         ],
+        controlsBuilder: (BuildContext context, ControlsDetails details) {
+          return _currentStep == 2
+              ? Container()
+              : Row(
+                  children: <Widget>[
+                    TextButton(
+                      onPressed: details.onStepContinue,
+                      child: const Text('CONTINUE'),
+                    ),
+                  ],
+                );
+        },
       ),
     );
   }

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:try_app/src/view/test/common/microphone_test_widget.dart';
 import 'package:try_app/src/view/test/common/final_question_widget.dart';
-
-import '../common/listening_material_widget.dart';
-import '../common/reading_material_widget.dart';
+import 'package:try_app/src/view/test/common/listening_material_widget.dart';
+import 'package:try_app/src/view/test/common/reading_material_widget.dart';
 
 class Task2View extends StatefulWidget {
   @override
@@ -20,11 +19,7 @@ class _Task2ViewState extends State<Task2View> {
   }
 
   void _submitAnswer() {
-    Navigator.of(context).pushNamed('/loading', arguments: {
-      'onComplete': (feedback) {
-        Navigator.of(context).pushNamed('/feedback', arguments: feedback);
-      },
-    });
+    Navigator.of(context).pushNamed('/loading');
   }
 
   @override
@@ -35,7 +30,7 @@ class _Task2ViewState extends State<Task2View> {
       ),
       body: Stepper(
         currentStep: _currentStep,
-        onStepContinue: _nextStep,
+        onStepContinue: _currentStep == 3 ? null : _nextStep,
         steps: [
           Step(
             title: Text("Microphone Test"),
@@ -65,6 +60,18 @@ class _Task2ViewState extends State<Task2View> {
             isActive: _currentStep == 3,
           ),
         ],
+        controlsBuilder: (BuildContext context, ControlsDetails details) {
+          return _currentStep == 3
+              ? Container()
+              : Row(
+                  children: <Widget>[
+                    TextButton(
+                      onPressed: details.onStepContinue,
+                      child: const Text('CONTINUE'),
+                    ),
+                  ],
+                );
+        },
       ),
     );
   }

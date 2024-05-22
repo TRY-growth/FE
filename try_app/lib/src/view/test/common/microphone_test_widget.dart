@@ -26,11 +26,6 @@ class MicrophoneTestWidget extends StatelessWidget {
           },
           child: Text("Start Recording"),
         ),
-        SizedBox(height: 20),
-        ElevatedButton(
-          onPressed: onNext,
-          child: Text("Next Question"),
-        ),
       ],
     );
   }

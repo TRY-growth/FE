@@ -17,12 +17,7 @@ class _Task1ViewState extends State<Task1View> {
   }
 
   void _submitAnswer() {
-    // 여기서 로딩 화면으로 이동하고 피드백을 받기 위한 post 요청을 수행합니다.
-    Navigator.of(context).pushNamed('/loading', arguments: {
-      'onComplete': (feedback) {
-        Navigator.of(context).pushNamed('/feedback', arguments: feedback);
-      },
-    });
+    Navigator.of(context).pushNamed('/loading');
   }
 
   @override
@@ -33,7 +28,7 @@ class _Task1ViewState extends State<Task1View> {
       ),
       body: Stepper(
         currentStep: _currentStep,
-        onStepContinue: _nextStep,
+        onStepContinue: _currentStep == 1 ? null : _nextStep,
         steps: [
           Step(
             title: Text("Microphone Test"),
@@ -50,6 +45,18 @@ class _Task1ViewState extends State<Task1View> {
             isActive: _currentStep == 1,
           ),
         ],
+        controlsBuilder: (BuildContext context, ControlsDetails details) {
+          return _currentStep == 1
+              ? Container()
+              : Row(
+                  children: <Widget>[
+                    TextButton(
+                      onPressed: details.onStepContinue,
+                      child: const Text('CONTINUE'),
+                    ),
+                  ],
+                );
+        },
       ),
     );
   }

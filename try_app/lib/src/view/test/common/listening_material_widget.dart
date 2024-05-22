@@ -16,10 +16,6 @@ class ListeningMaterialWidget extends StatelessWidget {
         ),
         SizedBox(height: 20),
         // 듣기 자료 오디오 플레이어 추가 필요
-        ElevatedButton(
-          onPressed: onNext,
-          child: Text("Next"),
-        ),
       ],
     );
   }

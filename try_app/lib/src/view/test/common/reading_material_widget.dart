@@ -21,11 +21,6 @@ class ReadingMaterialWidget extends StatelessWidget {
           content,
           style: TextStyle(fontSize: 18),
         ),
-        SizedBox(height: 20),
-        ElevatedButton(
-          onPressed: onNext,
-          child: Text("Next"),
-        ),
       ],
     );
   }

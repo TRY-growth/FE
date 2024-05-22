@@ -20,11 +20,7 @@ class _Task3ViewState extends State<Task3View> {
   }
 
   void _submitAnswer() {
-    Navigator.of(context).pushNamed('/loading', arguments: {
-      'onComplete': (feedback) {
-        Navigator.of(context).pushNamed('/feedback', arguments: feedback);
-      },
-    });
+    Navigator.of(context).pushNamed('/loading');
   }
 
   @override
@@ -35,7 +31,7 @@ class _Task3ViewState extends State<Task3View> {
       ),
       body: Stepper(
         currentStep: _currentStep,
-        onStepContinue: _nextStep,
+        onStepContinue: _currentStep == 3 ? null : _nextStep,
         steps: [
           Step(
             title: Text("Microphone Test"),
@@ -67,6 +63,18 @@ class _Task3ViewState extends State<Task3View> {
             isActive: _currentStep == 3,
           ),
         ],
+        controlsBuilder: (BuildContext context, ControlsDetails details) {
+          return _currentStep == 3
+              ? Container()
+              : Row(
+                  children: <Widget>[
+                    TextButton(
+                      onPressed: details.onStepContinue,
+                      child: const Text('CONTINUE'),
+                    ),
+                  ],
+                );
+        },
       ),
     );
   }

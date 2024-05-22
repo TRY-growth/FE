@@ -9,11 +9,7 @@ class NewsLearningView extends StatelessWidget {
     final question = args?['question'] as String?;
 
     void _submitAnswer() {
-      Navigator.of(context).pushNamed('/loading', arguments: {
-        'onComplete': (feedback) {
-          Navigator.of(context).pushNamed('/feedback', arguments: feedback);
-        },
-      });
+      Navigator.of(context).pushNamed('/loading');
     }
 
     return Scaffold(
