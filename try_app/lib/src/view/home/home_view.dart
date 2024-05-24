@@ -8,7 +8,6 @@ class HomeView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          SizedBox(height: 20),
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
