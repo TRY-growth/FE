@@ -16,8 +16,9 @@ class MicrophoneTestWidget extends StatelessWidget {
         ),
         SizedBox(height: 20),
         Text(
-          "Describe the city you live in",
-          style: TextStyle(fontSize: 18),
+          "Press the button below\nto answer with voice,\nor\npress the next button\nto answer with text.",
+          style: TextStyle(fontSize: 16),
+          textAlign: TextAlign.center,
         ),
         SizedBox(height: 20),
         ElevatedButton(

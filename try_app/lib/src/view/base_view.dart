@@ -15,20 +15,20 @@ class BaseView extends StatelessWidget {
         onTap: (index) {
           switch (index) {
             case 0:
-              Navigator.pushNamed(context, '/test');
+              Navigator.pushReplacementNamed(context, '/test');
               break;
             case 1:
-              Navigator.pushNamed(context, '/home');
+              Navigator.pushReplacementNamed(context, '/home');
               break;
             case 2:
-              Navigator.pushNamed(context, '/news');
+              Navigator.pushReplacementNamed(context, '/news');
               break;
           }
         },
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.school), label: 'Test'),
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.list), label: 'News'),
+          BottomNavigationBarItem(icon: Icon(Icons.article), label: 'News'),
         ],
       ),
     );

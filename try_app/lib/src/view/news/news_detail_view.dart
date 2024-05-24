@@ -1,48 +1,49 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:try_app/src/view/news/news_view_model.dart';
+import 'package:try_app/src/model/news_model.dart';
+import 'package:intl/intl.dart';
 
 class NewsDetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final newsDetails =
-        ModalRoute.of(context)?.settings.arguments as Map<String, String>?;
+    final newsDetails = ModalRoute.of(context)?.settings.arguments as News;
+    final newsViewModel = Provider.of<NewsViewModel>(context, listen: false);
 
-    void _startLearning() {
-      Navigator.of(context).pushNamed('/loading', arguments: {
-        'onComplete': (question) {
-          Navigator.of(context).pushNamed('/news_learning', arguments: {
-            'newsDetails': newsDetails,
-            'question': question,
-          });
-        },
-      });
+    void _startLearning() async {
+      await newsViewModel.fetchNewsQuestion(newsDetails.newsId);
+      Navigator.of(context).pushNamed('/news_learning',
+          arguments: newsViewModel.currentQuestion);
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("News Detail"),
-      ),
-      body: Padding(
+          // title: Text("News Detail"),
+          ),
+      body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (newsDetails != null) ...[
-              Image.network(newsDetails['thumbnail']!),
-              SizedBox(height: 8),
-              Text(newsDetails['title']!,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
-              SizedBox(height: 8),
-              Text(newsDetails['date']!, style: TextStyle(color: Colors.grey)),
-              SizedBox(height: 8),
-              Text(newsDetails['content']!),
-              SizedBox(height: 20),
-              ElevatedButton(
+            // Image.network("https://via.placeholder.com/150"),
+            // SizedBox(height: 8),
+            Text(newsDetails.newsTitle,
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
+            SizedBox(height: 12),
+            Text(
+              DateFormat('MMM dd, yyyy')
+                  .format(DateTime.parse(newsDetails.newsDate)),
+              style: TextStyle(color: Colors.grey),
+            ),
+            SizedBox(height: 16),
+            Text(newsDetails.newsArticle, style: TextStyle(fontSize: 14)),
+            SizedBox(height: 20),
+            Center(
+              child: ElevatedButton(
                 onPressed: _startLearning,
                 child: Text("Start Learning"),
               ),
-            ] else ...[
-              Text("No details available."),
-            ],
+            ),
           ],
         ),
       ),

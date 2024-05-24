@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class FinalQuestionWidget extends StatelessWidget {
   final String question;
-  final VoidCallback onSubmit;
+  final void Function(String) onSubmit;
 
   const FinalQuestionWidget(
       {Key? key, required this.question, required this.onSubmit})
@@ -10,6 +10,8 @@ class FinalQuestionWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextEditingController _controller = TextEditingController();
+
     return Column(
       children: [
         Text(
@@ -23,6 +25,7 @@ class FinalQuestionWidget extends StatelessWidget {
         ),
         SizedBox(height: 20),
         TextField(
+          controller: _controller,
           maxLines: 5,
           decoration: InputDecoration(
             border: OutlineInputBorder(),
@@ -31,7 +34,9 @@ class FinalQuestionWidget extends StatelessWidget {
         ),
         SizedBox(height: 20),
         ElevatedButton(
-          onPressed: onSubmit,
+          onPressed: () {
+            onSubmit(_controller.text);
+          },
           child: Text("Submit Answer"),
         ),
       ],

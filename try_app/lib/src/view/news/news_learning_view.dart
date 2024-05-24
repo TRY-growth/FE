@@ -1,34 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:try_app/src/view/news/news_view_model.dart';
+import 'package:try_app/src/model/news_question_model.dart';
 
 class NewsLearningView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final args =
-        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
-    final newsDetails = args?['newsDetails'] as Map<String, String>?;
-    final question = args?['question'] as String?;
+    final args = ModalRoute.of(context)?.settings.arguments as NewsQuestion?;
+    final newsViewModel = Provider.of<NewsViewModel>(context, listen: false);
+    final TextEditingController answerController = TextEditingController();
 
-    void _submitAnswer() {
+    void _submitAnswer() async {
       Navigator.of(context).pushNamed('/loading');
+      await newsViewModel.submitAnswer(
+          args!.newsSavePointId, answerController.text);
+      Navigator.of(context).pushReplacementNamed('/news_feedback',
+          arguments: newsViewModel.currentFeedback);
     }
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("News Learning"),
-      ),
+          // title: Text("News Learning"),
+          ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (newsDetails != null && question != null) ...[
-              Text(newsDetails['content']!, style: TextStyle(fontSize: 16)),
+            if (args != null) ...[
+              Text(
+                "Question: ${args.gptGeneratedQuestion}",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              ),
               SizedBox(height: 20),
-              Text("Based on the news, please answer the following question:",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-              SizedBox(height: 8),
-              Text(question),
               TextField(
+                controller: answerController,
                 maxLines: 5,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
@@ -36,9 +42,11 @@ class NewsLearningView extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: _submitAnswer,
-                child: Text("Submit"),
+              Center(
+                child: ElevatedButton(
+                  onPressed: _submitAnswer,
+                  child: Text("Submit"),
+                ),
               ),
             ] else ...[
               Text("No learning material available."),

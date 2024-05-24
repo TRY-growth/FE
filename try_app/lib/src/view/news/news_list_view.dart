@@ -1,54 +1,91 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:try_app/src/view/news/news_view_model.dart';
+import 'package:intl/intl.dart';
 
-class NewsListView extends StatelessWidget {
+class NewsListView extends StatefulWidget {
+  @override
+  _NewsListViewState createState() => _NewsListViewState();
+}
+
+class _NewsListViewState extends State<NewsListView> {
+  @override
+  void initState() {
+    super.initState();
+    final newsViewModel = Provider.of<NewsViewModel>(context, listen: false);
+    newsViewModel.fetchAllNews();
+  }
+
   @override
   Widget build(BuildContext context) {
-    final List<Map<String, String>> newsData = [
-      {
-        "thumbnail": "https://via.placeholder.com/150",
-        "title": "Sample News Title 1",
-        "date": "2023-01-01",
-        "content": "Detailed news content for news item 1."
-      },
-      {
-        "thumbnail": "https://via.placeholder.com/150",
-        "title": "Sample News Title 2",
-        "date": "2023-01-02",
-        "content": "Detailed news content for news item 2."
-      },
-      // Add more sample news data here
-    ];
-
     return Scaffold(
       appBar: AppBar(
-        title: Text("News List"),
+        title: Text(
+          'TRY : NEWS',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        // centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
-      body: ListView.builder(
-        itemCount: newsData.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            leading: Image.network(newsData[index]['thumbnail']!),
-            title: Text(newsData[index]['title']!),
-            subtitle: Text(newsData[index]['date']!),
-            onTap: () {
-              Navigator.of(context)
-                  .pushNamed('/news_detail', arguments: newsData[index]);
-            },
-          );
+      body: Consumer<NewsViewModel>(
+        builder: (context, newsViewModel, child) {
+          if (newsViewModel.newsList.isEmpty) {
+            return Center(child: CircularProgressIndicator());
+          } else {
+            return ListView.builder(
+              itemCount: newsViewModel.newsList.length,
+              itemBuilder: (context, index) {
+                final news = newsViewModel.newsList[index];
+                final date = DateTime.parse(news.newsDate);
+                final formattedDate = DateFormat('MMM dd, yyyy').format(date);
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Card(
+                    child: ListTile(
+                      title: Padding(
+                        padding: const EdgeInsets.only(bottom: 18),
+                        child: Text(
+                          news.newsTitle,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 17,
+                          ),
+                        ),
+                      ),
+                      subtitle: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(news.newsCategory),
+                          Text(formattedDate),
+                        ],
+                      ),
+                      onTap: () {
+                        Navigator.of(context)
+                            .pushNamed('/news_detail', arguments: news);
+                      },
+                    ),
+                  ),
+                );
+              },
+            );
+          }
         },
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.list), label: 'Tests'),
+          BottomNavigationBarItem(icon: Icon(Icons.school), label: 'Tests'),
           BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.article), label: 'News'),
         ],
         currentIndex: 2,
         onTap: (index) {
           if (index == 0) {
-            Navigator.of(context).pushNamed('/home');
-          } else if (index == 1) {
             Navigator.of(context).pushNamed('/test');
+          } else if (index == 1) {
+            Navigator.of(context).pushNamed('/home');
           }
         },
       ),

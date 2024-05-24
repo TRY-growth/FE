@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:try_app/src/model/news_feedback_model.dart';
 import 'dart:convert';
-import 'package:try_app/src/model/task1_feedback_model.dart';
 
-class FeedbackView extends StatelessWidget {
+class NewsFeedbackView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final feedbackDetails =
-        ModalRoute.of(context)?.settings.arguments as Task1Feedback?;
+        ModalRoute.of(context)?.settings.arguments as NewsFeedback?;
 
     final feedbackJson =
-        jsonDecode(feedbackDetails?.task1TotalFeedback ?? '{}');
+        jsonDecode(feedbackDetails?.userAnswerFeedback ?? '{}');
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Feedback"),
+        title: Text("News Feedback"),
       ),
       body: SingleChildScrollView(
         padding: EdgeInsets.all(16.0),
