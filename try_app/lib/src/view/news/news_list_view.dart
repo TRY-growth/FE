@@ -18,19 +18,9 @@ class _NewsListViewState extends State<NewsListView> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'TRY : NEWS',
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        // centerTitle: true,
-        automaticallyImplyLeading: false,
-      ),
-      body: Consumer<NewsViewModel>(
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Consumer<NewsViewModel>(
         builder: (context, newsViewModel, child) {
           if (newsViewModel.newsList.isEmpty) {
             return Center(child: CircularProgressIndicator());
@@ -71,21 +61,6 @@ class _NewsListViewState extends State<NewsListView> {
                 );
               },
             );
-          }
-        },
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.school), label: 'Tests'),
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.article), label: 'News'),
-        ],
-        currentIndex: 2,
-        onTap: (index) {
-          if (index == 0) {
-            Navigator.of(context).pushNamed('/test');
-          } else if (index == 1) {
-            Navigator.of(context).pushNamed('/home');
           }
         },
       ),

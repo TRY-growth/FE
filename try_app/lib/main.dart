@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:try_app/src/view/base_view.dart';
 
 import 'src/view/auth/login_view.dart';
 import 'src/view/auth/signup_view.dart';
-import 'src/view/home/home_view.dart';
 import 'src/view/news/news_detail_view.dart';
 import 'src/view/news/news_learning_view.dart';
 import 'src/view/news/news_list_view.dart';
@@ -77,7 +77,7 @@ class MyApp extends StatelessWidget {
           routes: {
             '/': (context) => LoginView(),
             '/signup': (context) => SignupView(),
-            '/home': (context) => HomeView(),
+            '/home': (context) => BaseView(),
             '/news': (context) => NewsListView(),
             '/news_detail': (context) => NewsDetailView(),
             '/loading': (context) => LoadingView(),
