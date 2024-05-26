@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'src/view/auth/login_view.dart';
@@ -41,20 +42,19 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // final textTheme = GoogleFonts.notoSansKrTextTheme(
-    //   Theme.of(context).textTheme,
-    // );
+    final textTheme = GoogleFonts.notoSansKrTextTheme(
+      Theme.of(context).textTheme,
+    );
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        // colorScheme: ColorScheme.fromSeed(
-        //   seedColor: Colors.teal,
-        //   brightness: Brightness.light,
-        // ),
-        // textTheme: textTheme,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.teal,
+          brightness: Brightness.light,
+        ),
+        textTheme: textTheme,
         useMaterial3: true,
-        fontFamily: 'PretendardVariable',
       ),
       initialRoute: '/home',
       routes: {
