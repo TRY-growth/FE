@@ -33,7 +33,6 @@ class NewsDetailView extends StatelessWidget {
             Text(
               DateFormat('MMM dd, yyyy')
                   .format(DateTime.parse(newsDetails.newsDate)),
-              style: TextStyle(color: Colors.grey),
             ),
             SizedBox(height: 16),
             Text(newsDetails.newsArticle, style: TextStyle(fontSize: 14)),

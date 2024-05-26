@@ -131,7 +131,6 @@ class _BaseViewState extends State<BaseView> {
                       },
                       child: Text(
                         'Save',
-                        style: TextStyle(color: Colors.teal),
                       ),
                     ),
                   ),
@@ -170,7 +169,7 @@ class _BaseViewState extends State<BaseView> {
             Spacer(),
             GestureDetector(
               onTap: () => _showProfileDialog(context),
-              child: Icon(Icons.account_circle, color: Colors.teal, size: 33),
+              child: Icon(Icons.account_circle),
             ),
           ],
         ),

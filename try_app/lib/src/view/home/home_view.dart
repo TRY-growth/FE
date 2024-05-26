@@ -29,9 +29,15 @@ class HomeView extends StatelessWidget {
                           children: [
                             Icon(Icons.school, size: 40),
                             SizedBox(height: 10),
-                            Text('Practice Test',
+                            Text('Practice Test 연습하기',
                                 style: TextStyle(
-                                    fontSize: 24, fontWeight: FontWeight.bold)),
+                                  fontSize: 24,
+                                  fontFamily: 'PretendardVariable',
+                                  fontVariations: [
+                                    FontVariation('wght', 700),
+                                  ],
+                                  // fontWeight: FontWeight.bold,
+                                )),
                             SizedBox(height: 10),
                             Text(
                               'Master the speaking section by practicing structured tasks.',
