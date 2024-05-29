@@ -11,11 +11,6 @@ class MicrophoneTestWidget extends StatelessWidget {
     return Column(
       children: [
         Text(
-          "Microphone Test",
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        ),
-        SizedBox(height: 20),
-        Text(
           "Press the button below\nto answer with voice,\nor\npress the next button\nto answer with text.",
           style: TextStyle(fontSize: 16),
           textAlign: TextAlign.center,

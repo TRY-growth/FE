@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:convert';
-import 'package:try_app/src/model/task1_feedback_model.dart';
+import 'package:try_app/src/model/task_feedback_model.dart';
 
 class FeedbackView extends StatelessWidget {
   @override
@@ -8,8 +8,7 @@ class FeedbackView extends StatelessWidget {
     final feedbackDetails =
         ModalRoute.of(context)?.settings.arguments as Task1Feedback?;
 
-    final feedbackJson =
-        jsonDecode(feedbackDetails?.task1TotalFeedback ?? '{}');
+    final feedbackJson = jsonDecode(feedbackDetails?.totalFeedback ?? '{}');
 
     return Scaffold(
       appBar: AppBar(

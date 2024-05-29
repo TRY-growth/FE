@@ -15,11 +15,6 @@ class FinalQuestionWidget extends StatelessWidget {
     return Column(
       children: [
         Text(
-          "Final Question",
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        ),
-        SizedBox(height: 20),
-        Text(
           question,
           style: TextStyle(fontSize: 18),
         ),

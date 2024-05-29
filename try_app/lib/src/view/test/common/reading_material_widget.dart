@@ -13,11 +13,6 @@ class ReadingMaterialWidget extends StatelessWidget {
     return Column(
       children: [
         Text(
-          "Reading Material",
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-        ),
-        SizedBox(height: 20),
-        Text(
           content,
           style: TextStyle(fontSize: 18),
         ),

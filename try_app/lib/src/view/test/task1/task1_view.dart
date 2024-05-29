@@ -20,7 +20,7 @@ class _Task1ViewState extends State<Task1View> {
 
   void _fetchQuestion() async {
     final task1ViewModel = Provider.of<Task1ViewModel>(context, listen: false);
-    await task1ViewModel.fetchTask1Question(1001);
+    await task1ViewModel.fetchTask1Question(1);
   }
 
   void _nextStep() {
@@ -31,7 +31,7 @@ class _Task1ViewState extends State<Task1View> {
 
   void _submitAnswer(String answer) async {
     final task1ViewModel = Provider.of<Task1ViewModel>(context, listen: false);
-    await task1ViewModel.submitAnswer(1001, answer);
+    await task1ViewModel.submitAnswer(1, answer);
     Navigator.of(context)
         .pushNamed('/loading', arguments: task1ViewModel.currentFeedback);
   }
@@ -58,7 +58,7 @@ class _Task1ViewState extends State<Task1View> {
                 Step(
                   title: Text("Final Question"),
                   content: FinalQuestionWidget(
-                    question: task1ViewModel.currentQuestion!.task1Question,
+                    question: task1ViewModel.currentQuestion!.question,
                     onSubmit: _submitAnswer,
                   ),
                   isActive: _currentStep == 1,
