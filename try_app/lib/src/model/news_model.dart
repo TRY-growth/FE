@@ -4,6 +4,7 @@ class News {
   final String newsCategory;
   final String newsReporter;
   final String newsDate;
+  final String newsURL;
   final String newsArticle;
 
   News({
@@ -12,6 +13,7 @@ class News {
     required this.newsCategory,
     required this.newsReporter,
     required this.newsDate,
+    required this.newsURL,
     required this.newsArticle,
   });
 
@@ -22,6 +24,7 @@ class News {
       newsCategory: json['newsCategory'],
       newsReporter: json['newsReporter'],
       newsDate: json['newsDate'],
+      newsURL: json['newsURL'],
       newsArticle: json['newsArticle'],
     );
   }

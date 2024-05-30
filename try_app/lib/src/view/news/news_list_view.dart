@@ -35,6 +35,16 @@ class _NewsListViewState extends State<NewsListView> {
                   padding: const EdgeInsets.all(8.0),
                   child: Card(
                     child: ListTile(
+                      leading: ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: AspectRatio(
+                          aspectRatio: 1 / 1, // 이미지의 비율을 1:1로 유지
+                          child: Image.network(
+                            news.newsURL,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
                       title: Padding(
                         padding: const EdgeInsets.only(bottom: 18),
                         child: Text(

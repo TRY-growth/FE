@@ -32,8 +32,8 @@ class NewsRepository {
   Future<NewsFeedback> submitAnswer(int savePointId, String answer) async {
     final response = await http.post(
       Uri.parse('$baseUrl/news/savepoint=$savePointId/userAnswer'),
-      headers: {'Content-Type': 'application/json'}, // Content-Type 유지
-      body: jsonEncode(answer), // JSON으로 인코딩된 문자열 그대로 전달
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(answer),
     );
 
     if (response.statusCode == 200) {
