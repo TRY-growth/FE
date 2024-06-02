@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class HomeView extends StatelessWidget {
+  const HomeView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -12,7 +14,7 @@ class HomeView extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Container(
+                SizedBox(
                   width: double.infinity,
                   child: InkWell(
                     onTap: () {
@@ -23,8 +25,8 @@ class HomeView extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Container(
-                        padding: EdgeInsets.all(32),
-                        child: Column(
+                        padding: const EdgeInsets.all(32),
+                        child: const Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(Icons.school, size: 40),
@@ -44,8 +46,8 @@ class HomeView extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
-                Container(
+                const SizedBox(height: 10),
+                SizedBox(
                   width: double.infinity,
                   child: InkWell(
                     onTap: () {
@@ -56,8 +58,8 @@ class HomeView extends StatelessWidget {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Container(
-                        padding: EdgeInsets.all(32),
-                        child: Column(
+                        padding: const EdgeInsets.all(32),
+                        child: const Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(Icons.article, size: 40),
@@ -80,15 +82,15 @@ class HomeView extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(height: 20),
-          Text(
+          const SizedBox(height: 20),
+          const Text(
             'Learning History',
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 20),
+          const SizedBox(height: 20),
           Expanded(
             child: ListView(
               scrollDirection: Axis.horizontal,
@@ -121,12 +123,12 @@ class HomeView extends StatelessWidget {
             children: <Widget>[
               Text(
                 task,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(date),
             ],
           ),

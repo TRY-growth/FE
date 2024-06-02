@@ -1,49 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:try_app/src/view/news/news_view_model.dart';
-import 'package:try_app/src/model/news_model.dart';
 import 'package:intl/intl.dart';
 
+import 'package:try_app/src/model/news_model.dart';
+
+import 'package:try_app/src/view/news/news_view_model.dart';
+
+import 'package:try_app/src/view/test/common/loading_view.dart';
+import 'package:try_app/src/view/news/news_learning_view.dart';
+
 class NewsDetailView extends StatelessWidget {
+  final News news;
+
+  const NewsDetailView({super.key, required this.news});
+
   @override
   Widget build(BuildContext context) {
-    final newsDetails = ModalRoute.of(context)?.settings.arguments as News;
     final newsViewModel = Provider.of<NewsViewModel>(context, listen: false);
 
-    void _startLearning() async {
-      await newsViewModel.fetchNewsQuestion(newsDetails.newsId);
-      Navigator.of(context).pushNamed('/news_learning',
-          arguments: newsViewModel.currentQuestion);
+    void startLearning() {
+      Navigator.of(context).push(MaterialPageRoute(
+        builder: (context) => LoadingView(
+          future: newsViewModel.fetchNewsQuestion(news.newsId),
+          nextWidget: (context, report) => NewsLearningView(report: report),
+        ),
+      ));
     }
 
     return Scaffold(
-      appBar: AppBar(
-          // title: Text("News Detail"),
-          ),
+      appBar: AppBar(),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Image.network("https://via.placeholder.com/150"),
-            // SizedBox(height: 8),
-            Text(newsDetails.newsTitle,
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
-            SizedBox(height: 12),
             Text(
-              DateFormat('MMM dd, yyyy')
-                  .format(DateTime.parse(newsDetails.newsDate)),
+              news.newsTitle,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
             ),
-            SizedBox(height: 20),
-            Image.network(newsDetails.newsURL, fit: BoxFit.cover),
-
-            SizedBox(height: 20),
-            Text(newsDetails.newsArticle, style: TextStyle(fontSize: 14)),
-            SizedBox(height: 20),
+            const SizedBox(height: 12),
+            Text(
+              DateFormat('MMM dd, yyyy').format(DateTime.parse(news.newsDate)),
+            ),
+            const SizedBox(height: 20),
+            Image.network(news.newsURL, fit: BoxFit.cover),
+            const SizedBox(height: 20),
+            Text(news.newsArticle, style: const TextStyle(fontSize: 14)),
+            const SizedBox(height: 20),
             Center(
               child: ElevatedButton(
-                onPressed: _startLearning,
-                child: Text("Start Learning"),
+                onPressed: startLearning,
+                child: const Text("Start Learning"),
               ),
             ),
           ],

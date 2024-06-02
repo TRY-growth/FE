@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+
 import 'package:try_app/src/model/news_model.dart';
-import 'package:try_app/src/model/news_question_model.dart';
-import 'package:try_app/src/model/news_feedback_model.dart';
+import 'package:try_app/src/model/report_model.dart';
+
 import 'package:try_app/src/repository/news_repository.dart';
 
 class NewsViewModel extends ChangeNotifier {
   final NewsRepository newsRepository;
   List<News> newsList = [];
-  NewsQuestion? currentQuestion;
-  NewsFeedback? currentFeedback;
+  ReportModel? currentReport;
 
   NewsViewModel({required this.newsRepository});
 
@@ -17,13 +17,15 @@ class NewsViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> fetchNewsQuestion(int newsId) async {
-    currentQuestion = await newsRepository.fetchNewsQuestion(newsId);
+  Future<ReportModel> fetchNewsQuestion(int newsId) async {
+    currentReport = await newsRepository.fetchNewsQuestion(newsId);
     notifyListeners();
+    return currentReport!;
   }
 
-  Future<void> submitAnswer(int savePointId, String answer) async {
-    currentFeedback = await newsRepository.submitAnswer(savePointId, answer);
+  Future<ReportModel> submitAnswer(int reportId, String answer) async {
+    currentReport = await newsRepository.submitAnswer(reportId, answer);
     notifyListeners();
+    return currentReport!;
   }
 }

@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:try_app/src/view/news/news_view_model.dart';
 import 'package:intl/intl.dart';
 
+import 'package:try_app/src/view/news/news_view_model.dart';
+import 'package:try_app/src/view/news/news_detail_view.dart';
+
 class NewsListView extends StatefulWidget {
+  const NewsListView({super.key});
+
   @override
   _NewsListViewState createState() => _NewsListViewState();
 }
@@ -23,7 +27,7 @@ class _NewsListViewState extends State<NewsListView> {
       child: Consumer<NewsViewModel>(
         builder: (context, newsViewModel, child) {
           if (newsViewModel.newsList.isEmpty) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else {
             return ListView.builder(
               itemCount: newsViewModel.newsList.length,
@@ -49,7 +53,7 @@ class _NewsListViewState extends State<NewsListView> {
                         padding: const EdgeInsets.only(bottom: 18),
                         child: Text(
                           news.newsTitle,
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontWeight: FontWeight.bold,
                             fontSize: 17,
                           ),
@@ -63,8 +67,11 @@ class _NewsListViewState extends State<NewsListView> {
                         ],
                       ),
                       onTap: () {
-                        Navigator.of(context)
-                            .pushNamed('/news_detail', arguments: news);
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => NewsDetailView(news: news),
+                          ),
+                        );
                       },
                     ),
                   ),

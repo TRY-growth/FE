@@ -10,41 +10,29 @@ import 'src/view/base_view.dart';
 
 import 'src/view/home/home_view_model.dart';
 
-import 'src/view/test/common/loading_view.dart';
-import 'src/view/test/common/feedback_view.dart';
-
-import 'src/view/test/task_selection_view_model.dart';
 import 'src/view/test/task_selection_view.dart';
 
 import 'src/repository/task1_repository.dart';
 import 'src/view/test/task1/task1_view_model.dart';
-import 'src/view/test/task1/task1_view.dart';
 
 import 'src/repository/task2_repository.dart';
 import 'src/view/test/task2/task2_view_model.dart';
-import 'src/view/test/task2/task2_view.dart';
 
 import 'src/repository/task3_repository.dart';
 import 'src/view/test/task3/task3_view_model.dart';
-import 'src/view/test/task3/task3_view.dart';
 
 import 'src/repository/task4_repository.dart';
 import 'src/view/test/task4/task4_view_model.dart';
-import 'src/view/test/task4/task4_view.dart';
 
 import 'src/repository/news_repository.dart';
 import 'src/view/news/news_view_model.dart';
 import 'src/view/news/news_list_view.dart';
-import 'src/view/news/news_detail_view.dart';
-import 'src/view/news/news_learning_view.dart';
-import 'src/view/news/news_feedback_view.dart';
 
 void main() {
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => HomeViewModel()),
-        ChangeNotifierProvider(create: (_) => TaskSelectionViewModel()),
         ChangeNotifierProvider(
             create: (_) => NewsViewModel(newsRepository: NewsRepository())),
         ChangeNotifierProvider(
@@ -56,12 +44,14 @@ void main() {
         ChangeNotifierProvider(
             create: (_) => Task4ViewModel(task4Repository: Task4Repository())),
       ],
-      child: MyApp(),
+      child: const MyApp(),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     final textTheme = GoogleFonts.notoSansKrTextTheme(
@@ -80,20 +70,11 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => LoginView(),
-        '/signup': (context) => SignupView(),
-        '/home': (context) => BaseView(),
-        '/loading': (context) => LoadingView(),
-        '/feedback': (context) => FeedbackView(),
-        '/test': (context) => TaskSelectionView(),
-        '/task1': (context) => Task1View(),
-        '/task2': (context) => Task2View(),
-        '/task3': (context) => Task3View(),
-        '/task4': (context) => Task4View(),
-        '/news': (context) => NewsListView(),
-        '/news_detail': (context) => NewsDetailView(),
-        '/news_learning': (context) => NewsLearningView(),
-        '/news_feedback': (context) => NewsFeedbackView(),
+        '/': (context) => const LoginView(),
+        '/signup': (context) => const SignupView(),
+        '/home': (context) => const BaseView(),
+        '/test': (context) => const TaskSelectionView(),
+        '/news': (context) => const NewsListView(),
       },
     );
   }

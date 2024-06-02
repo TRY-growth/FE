@@ -1,41 +1,68 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
-import 'package:try_app/src/model/task_feedback_model.dart';
+
+import 'package:try_app/src/model/report_model.dart';
 
 class FeedbackView extends StatelessWidget {
+  final ReportModel report;
+
+  const FeedbackView({super.key, required this.report});
+
   @override
   Widget build(BuildContext context) {
-    final feedbackDetails =
-        ModalRoute.of(context)?.settings.arguments as Task1Feedback?;
-
-    final feedbackJson = jsonDecode(feedbackDetails?.totalFeedback ?? '{}');
+    final totalFeedback = report.totalFeedback;
+    final detailFeedback = report.detailFeedback;
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Feedback"),
+        title: const Text("Feedback"),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            if (feedbackJson != null) ...[
-              _buildScoreCard(feedbackJson),
-              _buildFeedbackSection("Overall Feedback",
-                  feedbackJson['feedback'], 'overall_feedback'),
-              _buildFeedbackSection("Language Use Feedback",
-                  feedbackJson['feedback'], 'language_use_feedback'),
-              _buildFeedbackSection("Topic Development Feedback",
-                  feedbackJson['feedback'], 'topic_development_feedback'),
-              _buildTips(feedbackJson),
-            ],
-            SizedBox(height: 20),
+            Text(
+              "Submitted Answer",
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            ),
+            Card(
+              margin: const EdgeInsets.symmetric(vertical: 8),
+              child: ListTile(
+                title: Text(report.submitAnswer!),
+              ),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              "Modified Answer",
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            ),
+            Card(
+              margin: const EdgeInsets.symmetric(vertical: 8),
+              child: ListTile(
+                title: Text(report.detailFeedbackModifiedAnswer!),
+              ),
+            ),
+            const SizedBox(height: 16),
+            _buildScoreCard(totalFeedback!),
+            _buildFeedbackSection("Overall Feedback", totalFeedback.feedback,
+                (feedback) => feedback.overallFeedback),
+            _buildFeedbackSection(
+                "Language Use Feedback",
+                totalFeedback.feedback,
+                (feedback) => feedback.languageUseFeedback),
+            _buildFeedbackSection(
+                "Topic Development Feedback",
+                totalFeedback.feedback,
+                (feedback) => feedback.topicDevelopmentFeedback),
+            _buildTips(totalFeedback),
+            _buildDetailFeedbackSection(detailFeedback!),
+            const SizedBox(height: 20),
             Center(
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.pushNamed(context, '/home');
                 },
-                child: Text("Go to Home"),
+                child: const Text("Go to Home"),
               ),
             ),
           ],
@@ -44,25 +71,25 @@ class FeedbackView extends StatelessWidget {
     );
   }
 
-  Widget _buildScoreCard(Map<String, dynamic> feedbackJson) {
+  Widget _buildScoreCard(TotalFeedback totalFeedback) {
     return Card(
-      margin: EdgeInsets.symmetric(vertical: 8),
+      margin: const EdgeInsets.symmetric(vertical: 8),
       child: ListTile(
-        title: Text(
+        title: const Text(
           "Score",
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
         ),
         subtitle: Text(
-          "${feedbackJson['score']} / 4",
-          style: TextStyle(fontSize: 16),
+          "${totalFeedback.score} / 4",
+          style: const TextStyle(fontSize: 16),
           textAlign: TextAlign.center,
         ),
       ),
     );
   }
 
-  Widget _buildFeedbackSection(
-      String title, List<dynamic> feedbackList, String key) {
+  Widget _buildFeedbackSection(String title, List<FeedbackDetail> feedbackList,
+      String Function(FeedbackDetail) feedbackExtractor) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Column(
@@ -70,43 +97,78 @@ class FeedbackView extends StatelessWidget {
         children: [
           Text(
             title,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
           ),
-          SizedBox(height: 8),
+          const SizedBox(height: 8),
           ...feedbackList.map((feedback) {
             return Card(
-              margin: EdgeInsets.symmetric(vertical: 4),
+              margin: const EdgeInsets.symmetric(vertical: 4),
               child: ListTile(
-                subtitle: Text(feedback[key]),
+                subtitle: Text(feedbackExtractor(feedback)),
               ),
             );
-          }).toList(),
+          }),
         ],
       ),
     );
   }
 
-  Widget _buildTips(Map<String, dynamic> feedbackJson) {
+  Widget _buildTips(TotalFeedback totalFeedback) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             "Tips",
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
           ),
-          SizedBox(height: 8),
-          ...List.generate(3, (index) {
-            final tip = feedbackJson['tip${index + 1}'][0];
+          const SizedBox(height: 8),
+          ...totalFeedback.tip1.map((tip) {
+            return _buildTipCard(tip);
+          }),
+          ...totalFeedback.tip2.map((tip) {
+            return _buildTipCard(tip);
+          }),
+          ...totalFeedback.tip3.map((tip) {
+            return _buildTipCard(tip);
+          }),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTipCard(Tip tip) {
+    return Card(
+      margin: const EdgeInsets.symmetric(vertical: 4),
+      child: ListTile(
+        title: Text(tip.subheading),
+        subtitle: Text(tip.feedback),
+      ),
+    );
+  }
+
+  Widget _buildDetailFeedbackSection(DetailFeedback detailFeedback) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            "Detail Feedback",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+          ),
+          const SizedBox(height: 8),
+          ...detailFeedback.corrections.map((correction) {
             return Card(
-              margin: EdgeInsets.symmetric(vertical: 4),
+              margin: const EdgeInsets.symmetric(vertical: 4),
               child: ListTile(
-                title: Text(tip['subheading']),
-                subtitle: Text(tip['feedback']),
+                title: Text(correction.originalText),
+                subtitle: Text(
+                    "Correction: ${correction.correctedText}\nReason: ${correction.correctionReason}"),
               ),
             );
-          }),
+          }).toList(),
         ],
       ),
     );

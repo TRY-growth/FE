@@ -5,8 +5,7 @@ class ListeningMaterialWidget extends StatelessWidget {
   final VoidCallback onNext;
 
   const ListeningMaterialWidget(
-      {Key? key, required this.content, required this.onNext})
-      : super(key: key);
+      {super.key, required this.content, required this.onNext});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +14,7 @@ class ListeningMaterialWidget extends StatelessWidget {
         // 듣기 자료 오디오 플레이어 추가 필요
         Text(
           content,
-          style: TextStyle(fontSize: 18),
+          style: const TextStyle(fontSize: 18),
         ),
       ],
     );

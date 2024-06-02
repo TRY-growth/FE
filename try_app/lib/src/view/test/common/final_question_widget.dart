@@ -5,34 +5,33 @@ class FinalQuestionWidget extends StatelessWidget {
   final void Function(String) onSubmit;
 
   const FinalQuestionWidget(
-      {Key? key, required this.question, required this.onSubmit})
-      : super(key: key);
+      {super.key, required this.question, required this.onSubmit});
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController _controller = TextEditingController();
+    final TextEditingController controller = TextEditingController();
 
     return Column(
       children: [
         Text(
           question,
-          style: TextStyle(fontSize: 18),
+          style: const TextStyle(fontSize: 18),
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         TextField(
-          controller: _controller,
+          controller: controller,
           maxLines: 5,
-          decoration: InputDecoration(
+          decoration: const InputDecoration(
             border: OutlineInputBorder(),
             hintText: 'Your response',
           ),
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         ElevatedButton(
           onPressed: () {
-            onSubmit(_controller.text);
+            onSubmit(controller.text);
           },
-          child: Text("Submit Answer"),
+          child: const Text("Submit Answer"),
         ),
       ],
     );

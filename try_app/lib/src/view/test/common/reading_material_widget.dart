@@ -5,8 +5,7 @@ class ReadingMaterialWidget extends StatelessWidget {
   final VoidCallback onNext;
 
   const ReadingMaterialWidget(
-      {Key? key, required this.content, required this.onNext})
-      : super(key: key);
+      {super.key, required this.content, required this.onNext});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +13,7 @@ class ReadingMaterialWidget extends StatelessWidget {
       children: [
         Text(
           content,
-          style: TextStyle(fontSize: 18),
+          style: const TextStyle(fontSize: 18),
         ),
       ],
     );

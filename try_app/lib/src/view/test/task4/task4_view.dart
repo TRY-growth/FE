@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'package:try_app/src/view/test/common/feedback_view.dart';
+import 'package:try_app/src/view/test/common/loading_view.dart';
+
 import 'package:try_app/src/view/test/common/microphone_test_widget.dart';
+import 'package:try_app/src/view/test/common/listening_material_widget.dart';
 import 'package:try_app/src/view/test/common/final_question_widget.dart';
+
 import 'package:try_app/src/view/test/task4/task4_view_model.dart';
 
-import '../common/listening_material_widget.dart';
-
 class Task4View extends StatefulWidget {
+  const Task4View({super.key});
+
   @override
   _Task4ViewState createState() => _Task4ViewState();
 }
@@ -33,9 +39,12 @@ class _Task4ViewState extends State<Task4View> {
 
   void _submitAnswer(String answer) async {
     final task4ViewModel = Provider.of<Task4ViewModel>(context, listen: false);
-    await task4ViewModel.submitAnswer(1, answer);
-    Navigator.of(context)
-        .pushNamed('/loading', arguments: task4ViewModel.currentFeedback);
+    Navigator.of(context).push(MaterialPageRoute(
+      builder: (context) => LoadingView(
+        future: task4ViewModel.submitAnswer(1, answer),
+        nextWidget: (context, feedback) => FeedbackView(report: feedback),
+      ),
+    ));
   }
 
   @override
@@ -44,21 +53,21 @@ class _Task4ViewState extends State<Task4View> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text("Task 4"),
+        title: const Text("Task 4"),
       ),
       body: task4ViewModel.currentQuestion == null
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : Stepper(
               currentStep: _currentStep,
               onStepContinue: _currentStep == 2 ? null : _nextStep,
               steps: [
                 Step(
-                  title: Text("Microphone Test"),
+                  title: const Text("Microphone Test"),
                   content: MicrophoneTestWidget(onNext: _nextStep),
                   isActive: _currentStep == 0,
                 ),
                 Step(
-                  title: Text("Listening Material"),
+                  title: const Text("Listening Material"),
                   content: ListeningMaterialWidget(
                     content: task4ViewModel.currentQuestion!.lecture,
                     onNext: _nextStep,
@@ -66,7 +75,7 @@ class _Task4ViewState extends State<Task4View> {
                   isActive: _currentStep == 1,
                 ),
                 Step(
-                  title: Text("Final Question"),
+                  title: const Text("Final Question"),
                   content: FinalQuestionWidget(
                     question: task4ViewModel.currentQuestion!.question,
                     onSubmit: _submitAnswer,

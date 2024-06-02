@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
 
+import 'package:try_app/src/view/test/task1/task1_view.dart';
+import 'package:try_app/src/view/test/task2/task2_view.dart';
+import 'package:try_app/src/view/test/task3/task3_view.dart';
+import 'package:try_app/src/view/test/task4/task4_view.dart';
+
 class TaskSelectionView extends StatelessWidget {
+  const TaskSelectionView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -15,22 +22,22 @@ class TaskSelectionView extends StatelessWidget {
                     context,
                     'Task 1',
                     'Evaluate and express your preference between two options.',
-                    '/task1',
+                    Task1View(),
                   ),
                 ),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
                 Expanded(
                   child: _buildTaskCard(
                     context,
                     'Task 2',
                     'Respond to a campus situation with your solutions.',
-                    '/task2',
+                    Task2View(),
                   ),
                 ),
               ],
             ),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Expanded(
             child: Row(
               children: [
@@ -39,16 +46,16 @@ class TaskSelectionView extends StatelessWidget {
                     context,
                     'Task 3',
                     'Discuss an academic topic from a lecture or reading.',
-                    '/task3',
+                    Task3View(),
                   ),
                 ),
-                SizedBox(width: 16),
+                const SizedBox(width: 16),
                 Expanded(
                   child: _buildTaskCard(
                     context,
                     'Task 4',
                     'Synthesize information from multiple sources.',
-                    '/task4',
+                    Task4View(),
                   ),
                 ),
               ],
@@ -60,10 +67,11 @@ class TaskSelectionView extends StatelessWidget {
   }
 
   Widget _buildTaskCard(
-      BuildContext context, String title, String description, String route) {
+      BuildContext context, String title, String description, Widget taskView) {
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, route);
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => taskView));
       },
       child: Card(
         shape: RoundedRectangleBorder(
@@ -77,7 +85,7 @@ class TaskSelectionView extends StatelessWidget {
                 alignment: Alignment.topRight,
                 child: Text(
                   title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 28,
                   ),
@@ -87,7 +95,7 @@ class TaskSelectionView extends StatelessWidget {
                 alignment: Alignment.bottomLeft,
                 child: Text(
                   description,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                   ),
                 ),
