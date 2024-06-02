@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:try_app/src/model/report_model.dart';
+import 'home_view_model.dart';
+import 'learning_history_view.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final homeViewModel = Provider.of<HomeViewModel>(context, listen: false);
+    homeViewModel.fetchLearningHistory();
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Column(
@@ -14,70 +21,22 @@ class HomeView extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                SizedBox(
-                  width: double.infinity,
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/test');
-                    },
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Container(
-                        padding: const EdgeInsets.all(32),
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.school, size: 40),
-                            SizedBox(height: 10),
-                            Text('Practice Test',
-                                style: TextStyle(
-                                    fontSize: 24, fontWeight: FontWeight.bold)),
-                            SizedBox(height: 10),
-                            Text(
-                              'Master the speaking section by practicing structured tasks.',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 17),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                _buildNavigationCard(
+                  context,
+                  title: 'Practice Test',
+                  description:
+                      'Master the speaking section by practicing structured tasks.',
+                  route: '/test',
+                  icon: Icons.school,
                 ),
                 const SizedBox(height: 10),
-                SizedBox(
-                  width: double.infinity,
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.pushNamed(context, '/news');
-                    },
-                    child: Card(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Container(
-                        padding: const EdgeInsets.all(32),
-                        child: const Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.article, size: 40),
-                            SizedBox(height: 10),
-                            Text('Study with News',
-                                style: TextStyle(
-                                    fontSize: 24, fontWeight: FontWeight.bold)),
-                            SizedBox(height: 10),
-                            Text(
-                              'Enhance your listening and speaking skills with real-world news.',
-                              textAlign: TextAlign.center,
-                              style: TextStyle(fontSize: 17),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                _buildNavigationCard(
+                  context,
+                  title: 'Study with News',
+                  description:
+                      'Enhance your listening and speaking skills with real-world news.',
+                  route: '/news',
+                  icon: Icons.article,
                 ),
               ],
             ),
@@ -92,14 +51,25 @@ class HomeView extends StatelessWidget {
           ),
           const SizedBox(height: 20),
           Expanded(
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              children: <Widget>[
-                _buildLearningCard('Task 1', 'Completed on 2024-05-21'),
-                _buildLearningCard('Task 2', 'Completed on 2024-05-20'),
-                _buildLearningCard('Task 3', 'Completed on 2024-05-19'),
-                _buildLearningCard('Task 4', 'Completed on 2024-05-18'),
-              ],
+            child: Consumer<HomeViewModel>(
+              builder: (context, model, child) {
+                if (model.learningHistory.isEmpty) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                return ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: model.learningHistory.length,
+                  itemBuilder: (context, index) {
+                    final report = model.learningHistory[index];
+                    return _buildLearningCard(
+                      context,
+                      report.taskType,
+                      report.submitDate!,
+                      report,
+                    );
+                  },
+                );
+              },
             ),
           ),
         ],
@@ -107,7 +77,55 @@ class HomeView extends StatelessWidget {
     );
   }
 
-  Widget _buildLearningCard(String task, String date) {
+  Widget _buildNavigationCard(
+    BuildContext context, {
+    required String title,
+    required String description,
+    required String route,
+    required IconData icon,
+  }) {
+    return SizedBox(
+      width: double.infinity,
+      child: InkWell(
+        onTap: () {
+          Navigator.pushNamed(context, route);
+        },
+        child: Card(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Container(
+            padding: const EdgeInsets.all(32),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(icon, size: 40),
+                const SizedBox(height: 10),
+                Text(
+                  title,
+                  style: const TextStyle(
+                      fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  description,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 17),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLearningCard(
+    BuildContext context,
+    String taskType,
+    String submitDate,
+    ReportModel report,
+  ) {
     return Padding(
       padding: const EdgeInsets.only(right: 16.0),
       child: Card(
@@ -115,22 +133,31 @@ class HomeView extends StatelessWidget {
           borderRadius: BorderRadius.circular(20),
         ),
         child: Container(
-          width: 200, // 카드의 가로 길이
+          width: 200,
           padding: const EdgeInsets.all(16),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                task,
-                style: const TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
+          child: InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => LearningHistoryView(report: report),
                 ),
-              ),
-              const SizedBox(height: 10),
-              Text(date),
-            ],
+              );
+            },
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  taskType,
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 10),
+                Text(submitDate),
+              ],
+            ),
           ),
         ),
       ),

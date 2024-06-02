@@ -1,5 +1,6 @@
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:try_app/src/repository/home_repository.dart';
 
 import 'src/view/auth/login_view.dart';
 import 'src/view/auth/signup_view.dart';
@@ -30,7 +31,8 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => HomeViewModel()),
+        ChangeNotifierProvider(
+            create: (_) => HomeViewModel(homeRepository: HomeRepository())),
         ChangeNotifierProvider(
             create: (_) => NewsViewModel(newsRepository: NewsRepository())),
         ChangeNotifierProvider(
