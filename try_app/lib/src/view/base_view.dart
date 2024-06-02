@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:try_app/src/view/home/home_view.dart';
-import 'package:try_app/src/view/test/task_selection_view.dart';
-import 'package:try_app/src/view/news/news_list_view.dart';
+import 'package:try_app/src/view/test/test_view.dart';
+import 'package:try_app/src/view/news/news_view.dart';
 
 class BaseView extends StatefulWidget {
   const BaseView({super.key});
@@ -15,9 +15,9 @@ class _BaseViewState extends State<BaseView> {
   int _currentIndex = 1;
 
   final List<Widget> _children = [
-    const TaskSelectionView(),
+    const TestView(),
     const HomeView(),
-    const NewsListView(),
+    const NewsView(),
   ];
 
   void onTabTapped(int index) {

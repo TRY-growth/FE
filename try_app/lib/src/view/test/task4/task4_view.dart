@@ -6,7 +6,7 @@ import 'package:try_app/src/view/test/common/loading_view.dart';
 
 import 'package:try_app/src/view/test/common/microphone_test_widget.dart';
 import 'package:try_app/src/view/test/common/listening_material_widget.dart';
-import 'package:try_app/src/view/test/common/final_question_widget.dart';
+import 'package:try_app/src/view/test/common/question_widget.dart';
 
 import 'package:try_app/src/view/test/task4/task4_view_model.dart';
 
@@ -54,6 +54,7 @@ class _Task4ViewState extends State<Task4View> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Task 4"),
+        centerTitle: true,
       ),
       body: task4ViewModel.currentQuestion == null
           ? const Center(child: CircularProgressIndicator())
@@ -76,7 +77,7 @@ class _Task4ViewState extends State<Task4View> {
                 ),
                 Step(
                   title: const Text("Final Question"),
-                  content: FinalQuestionWidget(
+                  content: QuestionWidget(
                     question: task4ViewModel.currentQuestion!.question,
                     onSubmit: _submitAnswer,
                   ),

@@ -7,11 +7,11 @@ import 'package:try_app/src/model/report_model.dart';
 class Task3Repository {
   final String baseUrl = 'http://10.0.2.2:8080';
 
-  Future<Task3Question> fetchTask3Question(int taskId) async {
+  Future<Task3Model> fetchTask3Question(int taskId) async {
     final response = await http.get(Uri.parse('$baseUrl/task/3/$taskId'));
 
     if (response.statusCode == 200) {
-      return Task3Question.fromJson(jsonDecode(response.body));
+      return Task3Model.fromJson(jsonDecode(response.body));
     } else {
       throw Exception('Failed to load task3 question');
     }

@@ -1,14 +1,14 @@
-class Task1Question {
+class Task1Model {
   final String taskId;
   final String question;
 
-  Task1Question({
+  Task1Model({
     required this.taskId,
     required this.question,
   });
 
-  factory Task1Question.fromJson(Map<String, dynamic> json) {
-    return Task1Question(
+  factory Task1Model.fromJson(Map<String, dynamic> json) {
+    return Task1Model(
       taskId: json['taskId'],
       question: json['question'],
     );

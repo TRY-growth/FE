@@ -1,18 +1,18 @@
-class Task2Question {
+class Task2Model {
   final String taskId;
   final String passage;
   final String discussion;
   final String question;
 
-  Task2Question({
+  Task2Model({
     required this.taskId,
     required this.passage,
     required this.discussion,
     required this.question,
   });
 
-  factory Task2Question.fromJson(Map<String, dynamic> json) {
-    return Task2Question(
+  factory Task2Model.fromJson(Map<String, dynamic> json) {
+    return Task2Model(
       taskId: json['taskId'],
       passage: json['passage'],
       discussion: json['discussion'],

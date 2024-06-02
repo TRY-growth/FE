@@ -5,14 +5,14 @@ import 'package:intl/intl.dart';
 import 'package:try_app/src/view/news/news_view_model.dart';
 import 'package:try_app/src/view/news/news_detail_view.dart';
 
-class NewsListView extends StatefulWidget {
-  const NewsListView({super.key});
+class NewsView extends StatefulWidget {
+  const NewsView({super.key});
 
   @override
-  _NewsListViewState createState() => _NewsListViewState();
+  _NewsViewState createState() => _NewsViewState();
 }
 
-class _NewsListViewState extends State<NewsListView> {
+class _NewsViewState extends State<NewsView> {
   @override
   void initState() {
     super.initState();

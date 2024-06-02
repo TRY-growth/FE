@@ -1,4 +1,4 @@
-class News {
+class NewsModel {
   final int newsId;
   final String newsTitle;
   final String newsCategory;
@@ -7,7 +7,7 @@ class News {
   final String newsURL;
   final String newsArticle;
 
-  News({
+  NewsModel({
     required this.newsId,
     required this.newsTitle,
     required this.newsCategory,
@@ -17,8 +17,8 @@ class News {
     required this.newsArticle,
   });
 
-  factory News.fromJson(Map<String, dynamic> json) {
-    return News(
+  factory NewsModel.fromJson(Map<String, dynamic> json) {
+    return NewsModel(
       newsId: json['newsId'],
       newsTitle: json['newsTitle'],
       newsCategory: json['newsCategory'],

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class FinalQuestionWidget extends StatelessWidget {
+class QuestionWidget extends StatelessWidget {
   final String question;
   final void Function(String) onSubmit;
 
-  const FinalQuestionWidget(
+  const QuestionWidget(
       {super.key, required this.question, required this.onSubmit});
 
   @override

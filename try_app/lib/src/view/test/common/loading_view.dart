@@ -17,7 +17,9 @@ class LoadingView extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
-            appBar: AppBar(title: const Text("Loading")),
+            appBar: AppBar(
+              automaticallyImplyLeading: false,
+            ),
             body: const Center(child: CircularProgressIndicator()),
           );
         } else if (snapshot.hasError) {

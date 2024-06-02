@@ -10,7 +10,7 @@ import 'src/view/base_view.dart';
 
 import 'src/view/home/home_view_model.dart';
 
-import 'src/view/test/task_selection_view.dart';
+import 'src/view/test/test_view.dart';
 
 import 'src/repository/task1_repository.dart';
 import 'src/view/test/task1/task1_view_model.dart';
@@ -26,7 +26,7 @@ import 'src/view/test/task4/task4_view_model.dart';
 
 import 'src/repository/news_repository.dart';
 import 'src/view/news/news_view_model.dart';
-import 'src/view/news/news_list_view.dart';
+import 'src/view/news/news_view.dart';
 
 void main() {
   runApp(
@@ -73,8 +73,8 @@ class MyApp extends StatelessWidget {
         '/': (context) => const LoginView(),
         '/signup': (context) => const SignupView(),
         '/home': (context) => const BaseView(),
-        '/test': (context) => const TaskSelectionView(),
-        '/news': (context) => const NewsListView(),
+        '/test': (context) => const TestView(),
+        '/news': (context) => const NewsView(),
       },
     );
   }

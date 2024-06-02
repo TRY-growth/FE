@@ -5,8 +5,8 @@ import 'package:try_app/src/view/test/task2/task2_view.dart';
 import 'package:try_app/src/view/test/task3/task3_view.dart';
 import 'package:try_app/src/view/test/task4/task4_view.dart';
 
-class TaskSelectionView extends StatelessWidget {
-  const TaskSelectionView({super.key});
+class TestView extends StatelessWidget {
+  const TestView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class TaskSelectionView extends StatelessWidget {
                     context,
                     'Task 1',
                     'Evaluate and express your preference between two options.',
-                    Task1View(),
+                    const Task1View(),
                   ),
                 ),
                 const SizedBox(width: 16),
@@ -31,7 +31,7 @@ class TaskSelectionView extends StatelessWidget {
                     context,
                     'Task 2',
                     'Respond to a campus situation with your solutions.',
-                    Task2View(),
+                    const Task2View(),
                   ),
                 ),
               ],
@@ -46,7 +46,7 @@ class TaskSelectionView extends StatelessWidget {
                     context,
                     'Task 3',
                     'Discuss an academic topic from a lecture or reading.',
-                    Task3View(),
+                    const Task3View(),
                   ),
                 ),
                 const SizedBox(width: 16),
@@ -55,7 +55,7 @@ class TaskSelectionView extends StatelessWidget {
                     context,
                     'Task 4',
                     'Synthesize information from multiple sources.',
-                    Task4View(),
+                    const Task4View(),
                   ),
                 ),
               ],

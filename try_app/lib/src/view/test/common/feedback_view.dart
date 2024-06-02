@@ -15,15 +15,17 @@ class FeedbackView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Feedback"),
+        centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               "Submitted Answer",
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
             Card(
               margin: const EdgeInsets.symmetric(vertical: 8),
@@ -32,9 +34,9 @@ class FeedbackView extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 16),
-            Text(
+            const Text(
               "Modified Answer",
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
             Card(
               margin: const EdgeInsets.symmetric(vertical: 8),
@@ -168,7 +170,7 @@ class FeedbackView extends StatelessWidget {
                     "Correction: ${correction.correctedText}\nReason: ${correction.correctionReason}"),
               ),
             );
-          }).toList(),
+          }),
         ],
       ),
     );

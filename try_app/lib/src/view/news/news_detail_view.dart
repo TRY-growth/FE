@@ -10,7 +10,7 @@ import 'package:try_app/src/view/test/common/loading_view.dart';
 import 'package:try_app/src/view/news/news_learning_view.dart';
 
 class NewsDetailView extends StatelessWidget {
-  final News news;
+  final NewsModel news;
 
   const NewsDetailView({super.key, required this.news});
 

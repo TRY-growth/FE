@@ -7,12 +7,12 @@ import 'package:try_app/src/model/report_model.dart';
 class NewsRepository {
   final String baseUrl = 'http://10.0.2.2:8080';
 
-  Future<List<News>> fetchAllNews() async {
+  Future<List<NewsModel>> fetchAllNews() async {
     final response = await http.get(Uri.parse('$baseUrl/news'));
 
     if (response.statusCode == 200) {
       List<dynamic> data = jsonDecode(response.body);
-      return data.map((json) => News.fromJson(json)).toList();
+      return data.map((json) => NewsModel.fromJson(json)).toList();
     } else {
       throw Exception('Failed to load news');
     }

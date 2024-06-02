@@ -8,11 +8,11 @@ import 'package:try_app/src/repository/task2_repository.dart';
 class Task2ViewModel extends ChangeNotifier {
   final Task2Repository task2Repository;
   ReportModel? currentFeedback;
-  Task2Question? currentQuestion;
+  Task2Model? currentQuestion;
 
   Task2ViewModel({required this.task2Repository});
 
-  Future<Task2Question> fetchTask2Question(int taskId) async {
+  Future<Task2Model> fetchTask2Question(int taskId) async {
     currentQuestion = await task2Repository.fetchTask2Question(taskId);
     notifyListeners();
     return currentQuestion!;

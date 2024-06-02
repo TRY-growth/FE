@@ -5,7 +5,7 @@ import 'package:try_app/src/view/test/common/feedback_view.dart';
 import 'package:try_app/src/view/test/common/loading_view.dart';
 
 import 'package:try_app/src/view/test/common/microphone_test_widget.dart';
-import 'package:try_app/src/view/test/common/final_question_widget.dart';
+import 'package:try_app/src/view/test/common/question_widget.dart';
 import 'package:try_app/src/view/test/common/listening_material_widget.dart';
 import 'package:try_app/src/view/test/common/reading_material_widget.dart';
 
@@ -55,6 +55,7 @@ class _Task2ViewState extends State<Task2View> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Task 2"),
+        centerTitle: true,
       ),
       body: task2ViewModel.currentQuestion == null
           ? const Center(child: CircularProgressIndicator())
@@ -84,7 +85,7 @@ class _Task2ViewState extends State<Task2View> {
                 ),
                 Step(
                   title: const Text("Final Question"),
-                  content: FinalQuestionWidget(
+                  content: QuestionWidget(
                     question: task2ViewModel.currentQuestion!.question,
                     onSubmit: _submitAnswer,
                   ),
