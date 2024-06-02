@@ -1,7 +1,5 @@
 import 'package:provider/provider.dart';
-
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import 'src/view/auth/login_view.dart';
 import 'src/view/auth/signup_view.dart';
@@ -54,9 +52,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textTheme = GoogleFonts.notoSansKrTextTheme(
-      Theme.of(context).textTheme,
-    );
+    final textTheme = Theme.of(context).textTheme.apply(
+          fontFamily: 'Ridibatang',
+        );
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,

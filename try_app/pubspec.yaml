@@ -22,3 +22,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  fonts:
+    - family: Ridibatang
+      fonts:
+        - asset: assets/fonts/RIDIBatang.otf
