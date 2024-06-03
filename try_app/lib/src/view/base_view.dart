@@ -161,18 +161,26 @@ class _BaseViewState extends State<BaseView> {
 
   @override
   Widget build(BuildContext context) {
+    final textColor = Color(0xFF210A3B);
+
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: Row(
           children: [
             Text(
               _getAppBarTitle(_currentIndex),
-              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: textColor,
+                fontFamily: 'Merriweather',
+              ),
             ),
-            const Spacer(),
+            Spacer(),
             GestureDetector(
               onTap: () => _showProfileDialog(context),
-              child: const Icon(Icons.account_circle),
+              child: Icon(Icons.account_circle, color: textColor),
             ),
           ],
         ),

@@ -65,6 +65,7 @@ class MyApp extends StatelessWidget {
           seedColor: Colors.teal,
           brightness: Brightness.light,
         ),
+        // scaffoldBackgroundColor: Colors.white,
         textTheme: textTheme,
         useMaterial3: true,
       ),

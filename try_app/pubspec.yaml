@@ -26,3 +26,7 @@ flutter:
     - family: Ridibatang
       fonts:
         - asset: assets/fonts/RIDIBatang.otf
+    - family: Merriweather
+      fonts:
+        - asset: assets/fonts/Merriweather-Bold.otf
+        - asset: assets/fonts/Merriweather-Black.otf

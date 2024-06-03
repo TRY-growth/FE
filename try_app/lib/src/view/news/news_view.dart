@@ -22,6 +22,9 @@ class _NewsViewState extends State<NewsView> {
 
   @override
   Widget build(BuildContext context) {
+    final textColor = Color(0xFF210A3B);
+    final subHeaderColor = Color(0xFF008F9C);
+
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Consumer<NewsViewModel>(
@@ -35,44 +38,73 @@ class _NewsViewState extends State<NewsView> {
                 final news = newsViewModel.newsList[index];
                 final date = DateTime.parse(news.newsDate);
                 final formattedDate = DateFormat('MMM dd, yyyy').format(date);
+
                 return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Card(
-                    child: ListTile(
-                      leading: ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
-                        child: AspectRatio(
-                          aspectRatio: 1 / 1, // 이미지의 비율을 1:1로 유지
-                          child: Image.network(
-                            news.newsURL,
-                            fit: BoxFit.cover,
-                          ),
+                  padding: const EdgeInsets.symmetric(vertical: 12.0),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => NewsDetailView(news: news),
                         ),
+                      );
+                    },
+                    child: Container(
+                      height: 150, // 고정 높이 설정
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                      title: Padding(
-                        padding: const EdgeInsets.only(bottom: 18),
-                        child: Text(
-                          news.newsTitle,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 17,
-                          ),
-                        ),
-                      ),
-                      subtitle: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      clipBehavior: Clip.antiAlias,
+                      child: Row(
                         children: [
-                          Text(news.newsCategory),
-                          Text(formattedDate),
+                          Stack(
+                            children: [
+                              Container(
+                                width: 120,
+                                height: 150,
+                                child: Image.network(
+                                  news.newsURL,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              Container(
+                                width: 120,
+                                height: 150,
+                              ),
+                            ],
+                          ),
+                          Expanded(
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    news.newsCategory,
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontFamily: 'Barlow',
+                                      color: subHeaderColor,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    news.newsTitle,
+                                    style: TextStyle(
+                                      fontSize: 17,
+                                      fontFamily: 'Merriweather',
+                                      fontWeight: FontWeight.bold,
+                                      color: textColor,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
                         ],
                       ),
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => NewsDetailView(news: news),
-                          ),
-                        );
-                      },
                     ),
                   ),
                 );

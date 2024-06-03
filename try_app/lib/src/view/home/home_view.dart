@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:intl/intl.dart';
 import 'package:try_app/src/model/report_model.dart';
 import 'home_view_model.dart';
 import 'learning_history_view.dart';
@@ -12,67 +13,83 @@ class HomeView extends StatelessWidget {
     final homeViewModel = Provider.of<HomeViewModel>(context, listen: false);
     homeViewModel.fetchLearningHistory();
 
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Center(
-            child: Column(
+    final textColor = Color(0xFF210A3B);
+    final subHeaderColor = Color(0xFF008F9C);
+
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _buildNavigationCard(
-                  context,
-                  title: 'Practice Test',
-                  description:
-                      'Master the speaking section by practicing structured tasks.',
-                  route: '/test',
-                  icon: Icons.school,
+                Expanded(
+                  child: _buildNavigationCard(
+                    context,
+                    title: 'Test',
+                    description:
+                        'Practice your English skills with various types of tests.',
+                    route: '/test',
+                    icon: Icons.school,
+                    textColor: textColor,
+                    subHeaderColor: subHeaderColor,
+                  ),
                 ),
-                const SizedBox(height: 10),
-                _buildNavigationCard(
-                  context,
-                  title: 'Study with News',
-                  description:
-                      'Enhance your listening and speaking skills with real-world news.',
-                  route: '/news',
-                  icon: Icons.article,
+                const SizedBox(width: 10),
+                Expanded(
+                  child: _buildNavigationCard(
+                    context,
+                    title: 'News',
+                    description:
+                        'Read the latest news and learn English expressions.',
+                    route: '/news',
+                    icon: Icons.article,
+                    textColor: textColor,
+                    subHeaderColor: subHeaderColor,
+                  ),
                 ),
               ],
             ),
-          ),
-          const SizedBox(height: 20),
-          const Text(
-            'Learning History',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+            const SizedBox(height: 20),
+            Center(
+              child: const Text(
+                'Learning History',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
-          ),
-          const SizedBox(height: 20),
-          Expanded(
-            child: Consumer<HomeViewModel>(
-              builder: (context, model, child) {
-                if (model.learningHistory.isEmpty) {
-                  return const Center(child: CircularProgressIndicator());
-                }
-                return ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: model.learningHistory.length,
-                  itemBuilder: (context, index) {
-                    final report = model.learningHistory[index];
-                    return _buildLearningCard(
-                      context,
-                      report.taskType,
-                      report.submitDate!,
-                      report,
-                    );
-                  },
-                );
-              },
+            const SizedBox(height: 20),
+            Expanded(
+              child: Consumer<HomeViewModel>(
+                builder: (context, model, child) {
+                  if (model.learningHistory.isEmpty) {
+                    return const Center(child: CircularProgressIndicator());
+                  }
+                  return ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: model.learningHistory.length,
+                    itemBuilder: (context, index) {
+                      final report = model.learningHistory[index];
+                      return _buildLearningCard(
+                        context,
+                        report.taskType,
+                        DateFormat('MMM dd, yyyy')
+                            .format(DateTime.parse(report.submitDate!)),
+                        report,
+                        textColor: textColor,
+                        subHeaderColor: subHeaderColor,
+                      );
+                    },
+                  );
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -83,6 +100,8 @@ class HomeView extends StatelessWidget {
     required String description,
     required String route,
     required IconData icon,
+    required Color textColor,
+    required Color subHeaderColor,
   }) {
     return SizedBox(
       width: double.infinity,
@@ -92,25 +111,34 @@ class HomeView extends StatelessWidget {
         },
         child: Card(
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
+            borderRadius: BorderRadius.circular(12),
           ),
+          elevation: 0,
           child: Container(
-            padding: const EdgeInsets.all(32),
+            padding: const EdgeInsets.all(24),
+            height: 300, // 높이를 동일하게 설정
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(12),
+            ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(icon, size: 40),
+                Icon(icon, size: 40, color: subHeaderColor),
                 const SizedBox(height: 10),
                 Text(
                   title,
-                  style: const TextStyle(
-                      fontSize: 24, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: textColor,
+                  ),
                 ),
                 const SizedBox(height: 10),
                 Text(
                   description,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 17),
+                  style: TextStyle(fontSize: 14, color: textColor),
                 ),
               ],
             ),
@@ -124,17 +152,24 @@ class HomeView extends StatelessWidget {
     BuildContext context,
     String taskType,
     String submitDate,
-    ReportModel report,
-  ) {
+    ReportModel report, {
+    required Color textColor,
+    required Color subHeaderColor,
+  }) {
     return Padding(
       padding: const EdgeInsets.only(right: 16.0),
       child: Card(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(12),
         ),
+        elevation: 0,
         child: Container(
           width: 200,
           padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(12),
+          ),
           child: InkWell(
             onTap: () {
               Navigator.push(
@@ -149,13 +184,17 @@ class HomeView extends StatelessWidget {
               children: [
                 Text(
                   taskType,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
+                    color: textColor,
                   ),
                 ),
                 const SizedBox(height: 10),
-                Text(submitDate),
+                Text(
+                  submitDate,
+                  style: TextStyle(color: textColor),
+                ),
               ],
             ),
           ),
