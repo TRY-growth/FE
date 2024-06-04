@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:fluid_bottom_nav_bar/fluid_bottom_nav_bar.dart';
 import 'package:try_app/src/view/home/home_view.dart';
 import 'package:try_app/src/view/test/test_view.dart';
 import 'package:try_app/src/view/news/news_view.dart';
@@ -20,10 +20,59 @@ class _BaseViewState extends State<BaseView> {
     const NewsView(),
   ];
 
-  void onTabTapped(int index) {
+  void _handleNavigationChange(int index) {
     setState(() {
       _currentIndex = index;
     });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final textColor = Color(0xFF210A3B);
+
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        title: Row(
+          children: [
+            Text(
+              _getAppBarTitle(_currentIndex),
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: textColor,
+                fontFamily: 'Merriweather',
+              ),
+            ),
+            Spacer(),
+            GestureDetector(
+              onTap: () => _showProfileDialog(context),
+              child: Icon(Icons.account_circle, color: textColor),
+            ),
+          ],
+        ),
+        centerTitle: true,
+        automaticallyImplyLeading: false,
+      ),
+      body: IndexedStack(
+        index: _currentIndex,
+        children: _children,
+      ),
+      bottomNavigationBar: FluidNavBar(
+        icons: [
+          FluidNavBarIcon(icon: Icons.timer),
+          FluidNavBarIcon(icon: Icons.local_florist),
+          FluidNavBarIcon(icon: Icons.article),
+        ],
+        onChange: _handleNavigationChange,
+        scaleFactor: 1.5,
+        defaultIndex: 1,
+        style: FluidNavBarStyle(
+          // iconUnselectedForegroundColor: textColor,
+          iconSelectedForegroundColor: Color(0xFF008F9C),
+        ),
+      ),
+    );
   }
 
   String _getAppBarTitle(int index) {
@@ -156,50 +205,6 @@ class _BaseViewState extends State<BaseView> {
           ),
         );
       },
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final textColor = Color(0xFF210A3B);
-
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: Row(
-          children: [
-            Text(
-              _getAppBarTitle(_currentIndex),
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: textColor,
-                fontFamily: 'Merriweather',
-              ),
-            ),
-            Spacer(),
-            GestureDetector(
-              onTap: () => _showProfileDialog(context),
-              child: Icon(Icons.account_circle, color: textColor),
-            ),
-          ],
-        ),
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-      ),
-      body: IndexedStack(
-        index: _currentIndex,
-        children: _children,
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        onTap: onTabTapped,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.school), label: 'Test'),
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
-          BottomNavigationBarItem(icon: Icon(Icons.article), label: 'News'),
-        ],
-      ),
     );
   }
 }
