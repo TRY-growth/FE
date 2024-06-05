@@ -147,7 +147,7 @@ class FeedbackViewState extends State<FeedbackView> {
                 margin: const EdgeInsets.symmetric(horizontal: 4),
                 child: Container(
                   width: 300,
-                  height: 150, // 높이를 고정
+                  height: 250, // 높이를 고정
                   padding: const EdgeInsets.all(8),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
