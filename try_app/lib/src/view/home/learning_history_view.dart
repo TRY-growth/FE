@@ -55,7 +55,7 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
                     ),
                   ),
                   child: const Text(
-                    "Retry",
+                    "Re : TRY",
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -76,7 +76,7 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
       children: [
         Padding(
           padding:
-              const EdgeInsets.only(left: 16, right: 16, top: 0, bottom: 20),
+              const EdgeInsets.only(left: 16, right: 16, top: 0, bottom: 24),
           child: Row(
             children: const [
               Expanded(
@@ -91,6 +91,7 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
+                  fontFamily: 'Merriweather',
                   color: Color(0xFF008F9C),
                 ),
               ),
@@ -124,6 +125,7 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
           style: TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
+            // fontFamily: 'Merriweather',
             color: Color(0xFF008F9C),
           ),
         ),
@@ -137,8 +139,7 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
       children: [
         const Center(
           child: Padding(
-            padding:
-                const EdgeInsets.only(left: 16, right: 16, top: 20, bottom: 20),
+            padding: EdgeInsets.only(left: 16, right: 16, top: 20, bottom: 32),
             child: Row(
               children: const [
                 Expanded(
@@ -153,6 +154,7 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
                   style: TextStyle(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
+                    fontFamily: 'Merriweather',
                     color: Color(0xFF008F9C),
                   ),
                 ),
@@ -177,18 +179,25 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
                 margin: const EdgeInsets.symmetric(horizontal: 0),
                 child: Container(
                   width: MediaQuery.of(context).size.width - 64,
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(32),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         feedback.overallFeedback,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                          // fontWeight: FontWeight.bold,
+                          fontFamily: 'Barlow',
+                          fontSize: 17,
+                          color: Color(0xFF210A3B),
+                        ),
                       ),
+                      const SizedBox(height: 16),
                       _buildExpandableFeedbackSection(
                         "Language Use",
                         feedback.languageUseFeedback,
                       ),
+                      const SizedBox(height: 16),
                       _buildExpandableFeedbackSection(
                         "Topic Development",
                         feedback.topicDevelopmentFeedback,
@@ -208,12 +217,24 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
     return ExpansionTile(
       title: Text(
         title,
-        style: const TextStyle(fontWeight: FontWeight.bold),
+        style: const TextStyle(
+          fontWeight: FontWeight.bold,
+          fontFamily: 'Barlow',
+          fontSize: 18,
+          color: Color(0xFF210A3B),
+        ),
       ),
       children: [
         Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(feedback),
+          padding: const EdgeInsets.all(16),
+          child: Text(
+            feedback,
+            style: const TextStyle(
+              fontSize: 16,
+              fontFamily: 'Barlow',
+              color: Color(0xFF210A3B),
+            ),
+          ),
         ),
       ],
     );
@@ -230,8 +251,7 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
       children: [
         const Center(
             child: Padding(
-          padding:
-              const EdgeInsets.only(left: 16, right: 16, top: 40, bottom: 20),
+          padding: EdgeInsets.only(left: 16, right: 16, top: 40, bottom: 36),
           child: Row(
             children: const [
               Expanded(
@@ -246,6 +266,7 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
+                  fontFamily: 'Merriweather',
                   color: Color(0xFF008F9C),
                 ),
               ),
@@ -269,18 +290,29 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
                 margin: const EdgeInsets.symmetric(horizontal: 16),
                 child: Container(
                   width: 250,
-                  height: 300,
-                  padding: const EdgeInsets.all(16),
+                  height: 400,
+                  padding: const EdgeInsets.all(32),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         tip.subheading,
                         style: const TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 16),
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Barlow',
+                          fontSize: 18,
+                          color: Color(0xFF210A3B),
+                        ),
                       ),
-                      const SizedBox(height: 16),
-                      Text(tip.feedback, style: const TextStyle(fontSize: 14)),
+                      const SizedBox(height: 20),
+                      Text(
+                        tip.feedback,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontFamily: 'Barlow',
+                          color: Color(0xFF210A3B),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -297,36 +329,37 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Center(
-            child: Padding(
-          padding:
-              const EdgeInsets.only(left: 16, right: 16, top: 40, bottom: 20),
-          child: Row(
-            children: const [
-              Expanded(
-                child: Divider(
-                  thickness: 1,
-                  color: Color(0xFF008F9C),
+          child: Padding(
+            padding: EdgeInsets.only(left: 16, right: 16, top: 40, bottom: 36),
+            child: Row(
+              children: const [
+                Expanded(
+                  child: Divider(
+                    thickness: 1,
+                    color: Color(0xFF008F9C),
+                  ),
                 ),
-              ),
-              SizedBox(width: 10),
-              Text(
-                'Detail Feedback',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF008F9C),
+                SizedBox(width: 10),
+                Text(
+                  'Detail Feedback',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Merriweather',
+                    color: Color(0xFF008F9C),
+                  ),
                 ),
-              ),
-              SizedBox(width: 10),
-              Expanded(
-                child: Divider(
-                  thickness: 1,
-                  color: Color(0xFF008F9C),
+                SizedBox(width: 10),
+                Expanded(
+                  child: Divider(
+                    thickness: 1,
+                    color: Color(0xFF008F9C),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        )),
+        ),
         Center(
           child: Container(
             width: 300,
@@ -364,11 +397,15 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
                           child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 10),
                             child: Text(
-                              "Submitted Answer",
+                              "Submitted",
                               style: TextStyle(
-                                  color: _showModifiedAnswer
-                                      ? Colors.black
-                                      : Colors.white),
+                                color: _showModifiedAnswer
+                                    ? Colors.black
+                                    : Colors.white,
+                                fontFamily: 'Barlow',
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),
@@ -385,11 +422,15 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
                           child: Padding(
                             padding: const EdgeInsets.symmetric(vertical: 10),
                             child: Text(
-                              "Modified Answer",
+                              "Modified",
                               style: TextStyle(
-                                  color: _showModifiedAnswer
-                                      ? Colors.white
-                                      : Colors.black),
+                                color: _showModifiedAnswer
+                                    ? Colors.white
+                                    : Colors.black,
+                                fontFamily: 'Barlow',
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),
@@ -407,7 +448,7 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
 
   Widget _buildAnswerSection(String modifiedAnswer, String submittedAnswer) {
     return Padding(
-      padding: const EdgeInsets.only(top: 26, bottom: 16),
+      padding: const EdgeInsets.only(top: 26, bottom: 16, left: 16, right: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -431,6 +472,8 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
           text: diff.text,
           style: TextStyle(
             color: diff.operation == DIFF_INSERT ? Colors.green : Colors.black,
+            fontFamily: 'Barlow',
+            fontSize: 17,
           ),
         ));
       }
@@ -459,6 +502,8 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
           text: diff.text,
           style: TextStyle(
             color: diff.operation == DIFF_DELETE ? Colors.red : Colors.black,
+            fontFamily: 'Barlow',
+            fontSize: 17,
           ),
         ));
       }
@@ -516,56 +561,70 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
         elevation: 0,
         margin: const EdgeInsets.symmetric(vertical: 16),
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(32),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
                 correction.category,
-                style: const TextStyle(fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Merriweather',
+                  fontSize: 16,
+                  color: Color(0xFF210A3B),
+                ),
               ),
-              ListTile(
-                title: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Icon(
-                      Icons.error_outline,
-                      color: Colors.red,
-                    ),
-                    SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        correction.originalText,
-                        style: const TextStyle(color: Colors.red),
+              const SizedBox(height: 24),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Icon(
+                    Icons.error_outline,
+                    color: Colors.red,
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      correction.originalText,
+                      style: const TextStyle(
+                        color: Colors.red,
+                        fontFamily: 'Barlow',
+                        fontSize: 16,
                       ),
                     ),
-                  ],
-                ),
-                subtitle: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Icon(
-                          Icons.check_circle_outline,
-                          color: Colors.green,
-                        ),
-                        SizedBox(width: 8),
-                        Expanded(
-                          child: Text(
-                            correction.correctedText,
-                            style: const TextStyle(color: Colors.green),
-                          ),
-                        ),
-                      ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Icon(
+                    Icons.check_circle_outline,
+                    color: Colors.green,
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      correction.correctedText,
+                      style: const TextStyle(
+                        color: Colors.green,
+                        fontFamily: 'Barlow',
+                        fontSize: 16,
+                      ),
                     ),
-                    const SizedBox(height: 16),
-                    Text(
-                      correction.correctionReason,
-                      style: const TextStyle(color: Colors.black),
-                    ),
-                  ],
+                  ),
+                ],
+              ),
+              const SizedBox(height: 24),
+              Text(
+                correction.correctionReason,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontFamily: 'Barlow',
+                  fontSize: 17,
+
+                  // fontWeight: FontWeight.bold,
                 ),
               ),
             ],
