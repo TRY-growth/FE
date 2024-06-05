@@ -9,10 +9,10 @@ class NewsView extends StatefulWidget {
   const NewsView({super.key});
 
   @override
-  _NewsViewState createState() => _NewsViewState();
+  NewsViewState createState() => NewsViewState();
 }
 
-class _NewsViewState extends State<NewsView> {
+class NewsViewState extends State<NewsView> {
   @override
   void initState() {
     super.initState();

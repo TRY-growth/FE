@@ -8,10 +8,10 @@ class FeedbackView extends StatefulWidget {
   const FeedbackView({super.key, required this.report});
 
   @override
-  _FeedbackViewState createState() => _FeedbackViewState();
+  FeedbackViewState createState() => FeedbackViewState();
 }
 
-class _FeedbackViewState extends State<FeedbackView> {
+class FeedbackViewState extends State<FeedbackView> {
   @override
   Widget build(BuildContext context) {
     final totalFeedback = widget.report.totalFeedback;

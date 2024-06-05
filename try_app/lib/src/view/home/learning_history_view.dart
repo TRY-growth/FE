@@ -8,10 +8,10 @@ class LearningHistoryView extends StatefulWidget {
   const LearningHistoryView({super.key, required this.report});
 
   @override
-  _LearningHistoryViewState createState() => _LearningHistoryViewState();
+  LearningHistoryViewState createState() => LearningHistoryViewState();
 }
 
-class _LearningHistoryViewState extends State<LearningHistoryView> {
+class LearningHistoryViewState extends State<LearningHistoryView> {
   @override
   Widget build(BuildContext context) {
     final totalFeedback = widget.report.totalFeedback;

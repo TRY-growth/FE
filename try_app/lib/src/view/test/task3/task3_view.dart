@@ -15,10 +15,10 @@ class Task3View extends StatefulWidget {
   const Task3View({super.key});
 
   @override
-  _Task3ViewState createState() => _Task3ViewState();
+  Task3ViewState createState() => Task3ViewState();
 }
 
-class _Task3ViewState extends State<Task3View> {
+class Task3ViewState extends State<Task3View> {
   int _currentStep = 0;
 
   @override

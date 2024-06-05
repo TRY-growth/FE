@@ -13,10 +13,10 @@ class NewsLearningView extends StatefulWidget {
   const NewsLearningView({super.key, required this.report});
 
   @override
-  _NewsLearningViewState createState() => _NewsLearningViewState();
+  NewsLearningViewState createState() => NewsLearningViewState();
 }
 
-class _NewsLearningViewState extends State<NewsLearningView> {
+class NewsLearningViewState extends State<NewsLearningView> {
   int _currentStep = 0;
   final TextEditingController answerController = TextEditingController();
 

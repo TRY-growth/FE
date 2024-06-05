@@ -132,7 +132,7 @@ class DropCapText extends StatelessWidget {
       text: parseInlineMarkdown ? null : restData,
       children: parseInlineMarkdown ? mdRest!.toTextSpanList() : null,
       style: textStyle.apply(
-          fontSizeFactor: MediaQuery.of(context).textScaleFactor),
+          fontSizeFactor: MediaQuery.textScalerOf(context).scale(1)),
     );
 
     TextPainter textPainter = TextPainter(
@@ -240,7 +240,8 @@ class DropCapText extends StatelessWidget {
                       ? mdRest!.subchars(charIndexEnd).toTextSpanList()
                       : null,
                   style: textStyle.apply(
-                      fontSizeFactor: MediaQuery.of(context).textScaleFactor),
+                      fontSizeFactor:
+                          MediaQuery.textScalerOf(context).scale(1)),
                 ),
               ),
             ),
@@ -265,7 +266,7 @@ class DropCapText extends StatelessWidget {
           TextSpan(
             children: mdData.subchars(dropCapChars).toTextSpanList(),
             style: textStyle.apply(
-                fontSizeFactor: MediaQuery.of(context).textScaleFactor),
+                fontSizeFactor: MediaQuery.textScalerOf(context).scale(1)),
           ),
         ],
       ),

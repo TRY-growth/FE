@@ -8,10 +8,10 @@ class BaseView extends StatefulWidget {
   const BaseView({super.key});
 
   @override
-  _BaseViewState createState() => _BaseViewState();
+  BaseViewState createState() => BaseViewState();
 }
 
-class _BaseViewState extends State<BaseView> {
+class BaseViewState extends State<BaseView> {
   int _currentIndex = 1;
 
   final List<Widget> _children = [
@@ -68,7 +68,6 @@ class _BaseViewState extends State<BaseView> {
         scaleFactor: 1.5,
         defaultIndex: 1,
         style: const FluidNavBarStyle(
-          // iconUnselectedForegroundColor: textColor,
           iconSelectedForegroundColor: Color(0xFF008F9C),
         ),
       ),
