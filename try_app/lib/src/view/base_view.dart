@@ -37,7 +37,7 @@ class _BaseViewState extends State<BaseView> {
           children: [
             Text(
               _getAppBarTitle(_currentIndex),
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: textColor,
@@ -47,7 +47,7 @@ class _BaseViewState extends State<BaseView> {
             const Spacer(),
             GestureDetector(
               onTap: () => _showProfileDialog(context),
-              child: Icon(Icons.account_circle, color: textColor),
+              child: const Icon(Icons.account_circle, color: textColor),
             ),
           ],
         ),

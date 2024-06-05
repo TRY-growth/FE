@@ -14,10 +14,10 @@ class SignupView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sign Up', style: TextStyle(color: textColor)),
+        title: const Text('Sign Up', style: TextStyle(color: textColor)),
         backgroundColor: Colors.white,
         centerTitle: true,
-        iconTheme: IconThemeData(color: textColor),
+        iconTheme: const IconThemeData(color: textColor),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -28,7 +28,7 @@ class SignupView extends StatelessWidget {
               controller: emailController,
               decoration: InputDecoration(
                 labelText: 'Email',
-                labelStyle: TextStyle(color: subHeaderColor),
+                labelStyle: const TextStyle(color: subHeaderColor),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -39,7 +39,7 @@ class SignupView extends StatelessWidget {
               controller: nicknameController,
               decoration: InputDecoration(
                 labelText: 'Nickname',
-                labelStyle: TextStyle(color: subHeaderColor),
+                labelStyle: const TextStyle(color: subHeaderColor),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -50,7 +50,7 @@ class SignupView extends StatelessWidget {
               controller: passwordController,
               decoration: InputDecoration(
                 labelText: 'Password',
-                labelStyle: TextStyle(color: subHeaderColor),
+                labelStyle: const TextStyle(color: subHeaderColor),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -62,7 +62,7 @@ class SignupView extends StatelessWidget {
               controller: confirmPasswordController,
               decoration: InputDecoration(
                 labelText: 'Confirm Password',
-                labelStyle: TextStyle(color: subHeaderColor),
+                labelStyle: const TextStyle(color: subHeaderColor),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),

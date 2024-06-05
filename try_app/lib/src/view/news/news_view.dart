@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:intl/intl.dart';
+// import 'package:intl/intl.dart';
 
 import 'package:try_app/src/view/news/news_view_model.dart';
 import 'package:try_app/src/view/news/news_detail_view.dart';
@@ -36,8 +36,8 @@ class _NewsViewState extends State<NewsView> {
               itemCount: newsViewModel.newsList.length,
               itemBuilder: (context, index) {
                 final news = newsViewModel.newsList[index];
-                final date = DateTime.parse(news.newsDate);
-                final formattedDate = DateFormat('MMM dd, yyyy').format(date);
+                // final date = DateTime.parse(news.newsDate);
+                // final formattedDate = DateFormat('MMM dd, yyyy').format(date);
 
                 return Padding(
                   padding: const EdgeInsets.symmetric(vertical: 12.0),
@@ -83,7 +83,7 @@ class _NewsViewState extends State<NewsView> {
                                 children: [
                                   Text(
                                     news.newsCategory,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 14,
                                       fontFamily: 'Barlow',
                                       color: subHeaderColor,
@@ -92,7 +92,7 @@ class _NewsViewState extends State<NewsView> {
                                   const SizedBox(height: 8),
                                   Text(
                                     news.newsTitle,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 17,
                                       fontFamily: 'Merriweather',
                                       fontWeight: FontWeight.bold,

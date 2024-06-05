@@ -32,7 +32,7 @@ class NewsDetailView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: textColor),
+        iconTheme: const IconThemeData(color: textColor),
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -45,7 +45,7 @@ class NewsDetailView extends StatelessWidget {
             children: [
               Text(
                 news.newsTitle,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 36,
                   fontFamily: 'Merriweather',
                   fontWeight: FontWeight.bold,
@@ -58,7 +58,7 @@ class NewsDetailView extends StatelessWidget {
               Text(
                 DateFormat('MMM dd, yyyy')
                     .format(DateTime.parse(news.newsDate)),
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 12,
                   fontFamily: 'Merriweather',
                   color: subHeaderColor,
@@ -76,12 +76,12 @@ class NewsDetailView extends StatelessWidget {
               DropCapText(
                 news.newsArticle,
                 mode: DropCapMode.baseline,
-                dropCapStyle: TextStyle(
+                dropCapStyle: const TextStyle(
                   fontSize: 36,
                   fontFamily: 'Merriweather',
                   color: subHeaderColor,
                 ),
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   fontFamily: 'Barlow',
                   letterSpacing: 0.5,
