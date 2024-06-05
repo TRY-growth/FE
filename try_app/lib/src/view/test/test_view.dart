@@ -18,10 +18,10 @@ class TestView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 16, right: 16, top: 0),
+            const Padding(
+              padding: EdgeInsets.only(left: 16, right: 16, top: 0),
               child: Row(
-                children: const [
+                children: [
                   Expanded(
                     child: Divider(
                       thickness: 1,

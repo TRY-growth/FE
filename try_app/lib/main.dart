@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:try_app/src/repository/home_repository.dart';
 
 import 'src/view/auth/login_view.dart';
-import 'src/view/auth/signup_view.dart';
 
 import 'src/view/base_view.dart';
 
@@ -74,7 +73,6 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const LoginView(),
-        '/signup': (context) => const SignupView(),
         '/home': (context) => const BaseView(),
         '/test': (context) => const TestView(),
         '/news': (context) => const NewsView(),

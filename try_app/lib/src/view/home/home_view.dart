@@ -85,11 +85,10 @@ class HomeViewState extends State<HomeView>
                   ),
                 ),
                 const SizedBox(height: 32),
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 48), // 좌우 패딩 적용
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 48), // 좌우 패딩 적용
                   child: Row(
-                    children: const [
+                    children: [
                       Expanded(
                         child: Divider(
                           thickness: 1,

@@ -47,7 +47,7 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
                     // 적절한 경로와 인수로 Navigator.push 사용
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF008F9C),
+                    backgroundColor: const Color(0xFF008F9C),
                     padding: const EdgeInsets.symmetric(
                         horizontal: 32, vertical: 12),
                     shape: RoundedRectangleBorder(
@@ -74,11 +74,10 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
   Widget _buildScoreCard(TotalFeedback totalFeedback) {
     return Column(
       children: [
-        Padding(
-          padding:
-              const EdgeInsets.only(left: 16, right: 16, top: 0, bottom: 24),
+        const Padding(
+          padding: EdgeInsets.only(left: 16, right: 16, top: 0, bottom: 24),
           child: Row(
-            children: const [
+            children: [
               Expanded(
                 child: Divider(
                   thickness: 1,
@@ -106,7 +105,7 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
           ),
         ),
         _buildScoreIcons(int.parse(totalFeedback.score)),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
       ],
     );
   }
@@ -119,10 +118,10 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
           'assets/images/$score.png',
           height: 100,
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         Text(
           '$score / 4',
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
             // fontFamily: 'Merriweather',
@@ -141,7 +140,7 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
           child: Padding(
             padding: EdgeInsets.only(left: 16, right: 16, top: 20, bottom: 32),
             child: Row(
-              children: const [
+              children: [
                 Expanded(
                   child: Divider(
                     thickness: 1,
@@ -253,7 +252,7 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
             child: Padding(
           padding: EdgeInsets.only(left: 16, right: 16, top: 40, bottom: 36),
           child: Row(
-            children: const [
+            children: [
               Expanded(
                 child: Divider(
                   thickness: 1,
@@ -332,7 +331,7 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
           child: Padding(
             padding: EdgeInsets.only(left: 16, right: 16, top: 40, bottom: 36),
             child: Row(
-              children: const [
+              children: [
                 Expanded(
                   child: Divider(
                     thickness: 1,
@@ -379,7 +378,7 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
                     height: 40,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
-                      color: Color(0xFF008F9C),
+                      color: const Color(0xFF008F9C),
                     ),
                   ),
                 ),
