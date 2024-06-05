@@ -1,5 +1,5 @@
-import 'package:diff_match_patch/diff_match_patch.dart';
 import 'package:flutter/material.dart';
+import 'package:diff_match_patch/diff_match_patch.dart';
 import 'package:try_app/src/model/report_model.dart';
 
 class LearningHistoryView extends StatefulWidget {
@@ -12,6 +12,8 @@ class LearningHistoryView extends StatefulWidget {
 }
 
 class LearningHistoryViewState extends State<LearningHistoryView> {
+  bool _showModifiedAnswer = true;
+
   @override
   Widget build(BuildContext context) {
     final totalFeedback = widget.report.totalFeedback;
@@ -19,30 +21,48 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Learning History Detail"),
-        centerTitle: true,
+        // title: const Text("Report"),
+        // centerTitle: true,
         automaticallyImplyLeading: true,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.only(left: 32, right: 32, top: 0, bottom: 32),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildScoreCard(totalFeedback!),
             _buildOverallFeedback(totalFeedback),
             _buildTips(totalFeedback),
-            _buildModifiedAnswerWithFeedback(
-              widget.report.detailFeedbackModifiedAnswer!,
-              detailFeedback!,
-            ),
+            _buildDetailFeedbackHeader(),
+            _buildAnswerSection(widget.report.detailFeedbackModifiedAnswer!,
+                widget.report.submitAnswer!),
+            ..._buildDetailFeedbackCards(detailFeedback!),
             const SizedBox(height: 20),
             Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  // Retry logic based on taskType and taskId or newsId
-                  // 적절한 경로와 인수로 Navigator.push 사용
-                },
-                child: const Text("Retry"),
+              child: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    // Retry logic based on taskType and taskId or newsId
+                    // 적절한 경로와 인수로 Navigator.push 사용
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFF008F9C),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 32, vertical: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: const Text(
+                    "Retry",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
               ),
             ),
           ],
@@ -52,19 +72,56 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
   }
 
   Widget _buildScoreCard(TotalFeedback totalFeedback) {
-    return Card(
-      margin: const EdgeInsets.symmetric(vertical: 8),
-      child: ListTile(
-        title: const Text(
-          "Score",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+    return Column(
+      children: [
+        Padding(
+          padding:
+              const EdgeInsets.only(left: 16, right: 16, top: 0, bottom: 20),
+          child: Row(
+            children: const [
+              Expanded(
+                child: Divider(
+                  thickness: 1,
+                  color: Color(0xFF008F9C),
+                ),
+              ),
+              SizedBox(width: 10),
+              Text(
+                'Score',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF008F9C),
+                ),
+              ),
+              SizedBox(width: 10),
+              Expanded(
+                child: Divider(
+                  thickness: 1,
+                  color: Color(0xFF008F9C),
+                ),
+              ),
+            ],
+          ),
         ),
-        subtitle: Text(
-          "${totalFeedback.score} / 4",
-          style: const TextStyle(fontSize: 16),
-          textAlign: TextAlign.center,
-        ),
-      ),
+        _buildScoreIcons(int.parse(totalFeedback.score)),
+        SizedBox(height: 20),
+      ],
+    );
+  }
+
+  Widget _buildScoreIcons(int score) {
+    List<Widget> icons = [];
+    for (int i = 0; i < 4; i++) {
+      icons.add(Image.asset(
+        'assets/images/score.png',
+        color: i < score ? null : Colors.grey.shade300,
+        height: 50,
+      ));
+    }
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: icons,
     );
   }
 
@@ -74,10 +131,33 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
       children: [
         const Center(
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 16),
-            child: Text(
-              "Overall Feedback",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            padding:
+                const EdgeInsets.only(left: 16, right: 16, top: 20, bottom: 20),
+            child: Row(
+              children: const [
+                Expanded(
+                  child: Divider(
+                    thickness: 1,
+                    color: Color(0xFF008F9C),
+                  ),
+                ),
+                SizedBox(width: 10),
+                Text(
+                  'Overall Feedback',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF008F9C),
+                  ),
+                ),
+                SizedBox(width: 10),
+                Expanded(
+                  child: Divider(
+                    thickness: 1,
+                    color: Color(0xFF008F9C),
+                  ),
+                ),
+              ],
             ),
           ),
         ),
@@ -86,10 +166,12 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
           child: Row(
             children: totalFeedback.feedback.map((feedback) {
               return Card(
-                margin: const EdgeInsets.symmetric(horizontal: 4),
+                color: Colors.white,
+                elevation: 0,
+                margin: const EdgeInsets.symmetric(horizontal: 0),
                 child: Container(
-                  width: 366,
-                  padding: const EdgeInsets.all(8),
+                  width: MediaQuery.of(context).size.width - 64,
+                  padding: const EdgeInsets.all(16),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -141,34 +223,58 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Center(
-          child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 16),
-            child: Text(
-              "Tips",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-            ),
+            child: Padding(
+          padding:
+              const EdgeInsets.only(left: 16, right: 16, top: 40, bottom: 20),
+          child: Row(
+            children: const [
+              Expanded(
+                child: Divider(
+                  thickness: 1,
+                  color: Color(0xFF008F9C),
+                ),
+              ),
+              SizedBox(width: 10),
+              Text(
+                'Tips',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF008F9C),
+                ),
+              ),
+              SizedBox(width: 10),
+              Expanded(
+                child: Divider(
+                  thickness: 1,
+                  color: Color(0xFF008F9C),
+                ),
+              ),
+            ],
           ),
-        ),
-        const SizedBox(height: 8),
+        )),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
             children: allTips.map((tip) {
               return Card(
-                margin: const EdgeInsets.symmetric(horizontal: 4),
+                color: Colors.white,
+                elevation: 0,
+                margin: const EdgeInsets.symmetric(horizontal: 16),
                 child: Container(
-                  width: 300,
-                  height: 200,
-                  padding: const EdgeInsets.all(8),
+                  width: 250,
+                  height: 300,
+                  padding: const EdgeInsets.all(16),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         tip.subheading,
-                        style: const TextStyle(fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 16),
                       ),
-                      const SizedBox(height: 8),
-                      Text(tip.feedback),
+                      const SizedBox(height: 16),
+                      Text(tip.feedback, style: const TextStyle(fontSize: 14)),
                     ],
                   ),
                 ),
@@ -180,56 +286,215 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
     );
   }
 
-  Widget _buildModifiedAnswerWithFeedback(
-      String modifiedAnswer, DetailFeedback detailFeedback) {
+  Widget _buildDetailFeedbackHeader() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Center(
-          child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 16),
-            child: Text(
-              "Modified Answer",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            child: Padding(
+          padding:
+              const EdgeInsets.only(left: 16, right: 16, top: 40, bottom: 20),
+          child: Row(
+            children: const [
+              Expanded(
+                child: Divider(
+                  thickness: 1,
+                  color: Color(0xFF008F9C),
+                ),
+              ),
+              SizedBox(width: 10),
+              Text(
+                'Detail Feedback',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF008F9C),
+                ),
+              ),
+              SizedBox(width: 10),
+              Expanded(
+                child: Divider(
+                  thickness: 1,
+                  color: Color(0xFF008F9C),
+                ),
+              ),
+            ],
+          ),
+        )),
+        Center(
+          child: Container(
+            width: 300,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              color: Colors.white,
+            ),
+            child: Stack(
+              children: [
+                AnimatedAlign(
+                  alignment: _showModifiedAnswer
+                      ? Alignment.centerRight
+                      : Alignment.centerLeft,
+                  duration: const Duration(milliseconds: 300),
+                  child: Container(
+                    width: 150,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: Colors.teal,
+                    ),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            _showModifiedAnswer = false;
+                          });
+                        },
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: Text(
+                              "Submitted Answer",
+                              style: TextStyle(
+                                  color: _showModifiedAnswer
+                                      ? Colors.black
+                                      : Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            _showModifiedAnswer = true;
+                          });
+                        },
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: Text(
+                              "Modified Answer",
+                              style: TextStyle(
+                                  color: _showModifiedAnswer
+                                      ? Colors.white
+                                      : Colors.black),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
         ),
-        const SizedBox(height: 8),
-        RichText(
-          text: TextSpan(
-            children: _buildTextSpans(modifiedAnswer, detailFeedback),
-            style: const TextStyle(color: Colors.black),
-          ),
-        ),
-        const SizedBox(height: 16),
-        ..._buildDetailFeedbackCards(detailFeedback),
       ],
     );
   }
 
-  List<InlineSpan> _buildTextSpans(
-      String modifiedAnswer, DetailFeedback detailFeedback) {
-    DiffMatchPatch dmp = DiffMatchPatch();
-    List<Diff> diffs = dmp.diff('', modifiedAnswer);
-    dmp.diffCleanupSemantic(diffs);
+  Widget _buildAnswerSection(String modifiedAnswer, String submittedAnswer) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 26, bottom: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (_showModifiedAnswer)
+            _buildModifiedAnswerWithFeedback(modifiedAnswer, submittedAnswer)
+          else
+            _buildSubmittedAnswer(submittedAnswer, modifiedAnswer),
+        ],
+      ),
+    );
+  }
 
+  Widget _buildModifiedAnswerWithFeedback(
+      String modifiedAnswer, String submittedAnswer) {
+    final diffs = _generateDiffs(submittedAnswer, modifiedAnswer);
+    final spans = <TextSpan>[];
+
+    for (var diff in diffs) {
+      if (diff.operation == DIFF_EQUAL || diff.operation == DIFF_INSERT) {
+        spans.add(TextSpan(
+          text: diff.text,
+          style: TextStyle(
+            color: diff.operation == DIFF_INSERT ? Colors.green : Colors.black,
+          ),
+        ));
+      }
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        RichText(
+          text: TextSpan(
+            children: spans,
+            style: const TextStyle(color: Colors.black),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildSubmittedAnswer(String submittedAnswer, String modifiedAnswer) {
+    final diffs = _generateDiffs(submittedAnswer, modifiedAnswer);
+    final spans = <TextSpan>[];
+
+    for (var diff in diffs) {
+      if (diff.operation == DIFF_EQUAL || diff.operation == DIFF_DELETE) {
+        spans.add(TextSpan(
+          text: diff.text,
+          style: TextStyle(
+            color: diff.operation == DIFF_DELETE ? Colors.red : Colors.black,
+          ),
+        ));
+      }
+    }
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        RichText(
+          text: TextSpan(
+            children: spans,
+            style: const TextStyle(color: Colors.black),
+          ),
+        ),
+        // const SizedBox(height: 50),
+      ],
+    );
+  }
+
+  List<Diff> _generateDiffs(String text1, String text2) {
+    DiffMatchPatch dmp = DiffMatchPatch();
+    List<Diff> diffs = dmp.diff(text1, text2);
+    dmp.diffCleanupSemantic(diffs);
+    return diffs;
+  }
+
+  List<InlineSpan> _buildTextSpans(List<Diff> diffs, bool isModified) {
     final textSpans = <InlineSpan>[];
 
     for (var diff in diffs) {
       TextStyle? textStyle;
-      switch (diff.operation) {
-        case DIFF_INSERT:
-          textStyle = const TextStyle(color: Colors.green);
-          break;
-        case DIFF_DELETE:
-          textStyle = const TextStyle(
-            color: Colors.red,
-            decoration: TextDecoration.lineThrough,
-          );
-          break;
-        case DIFF_EQUAL:
-          textStyle = const TextStyle(color: Colors.black);
-          break;
+      if (diff.operation == DIFF_INSERT) {
+        textStyle = isModified
+            ? const TextStyle(color: Colors.green)
+            : const TextStyle(color: Colors.red);
+      } else if (diff.operation == DIFF_DELETE) {
+        textStyle = isModified
+            ? const TextStyle(
+                color: Colors.red, decoration: TextDecoration.lineThrough)
+            : const TextStyle(color: Colors.green);
+      } else {
+        textStyle = const TextStyle(color: Colors.black);
       }
 
       textSpans.add(TextSpan(text: diff.text, style: textStyle));
@@ -241,9 +506,11 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
   List<Widget> _buildDetailFeedbackCards(DetailFeedback detailFeedback) {
     return detailFeedback.corrections.map((correction) {
       return Card(
-        margin: const EdgeInsets.symmetric(vertical: 8),
+        color: Colors.white,
+        elevation: 0,
+        margin: const EdgeInsets.symmetric(vertical: 16),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -253,11 +520,13 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
               ),
               ListTile(
                 title: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Icon(
                       Icons.error_outline,
                       color: Colors.red,
                     ),
+                    SizedBox(width: 8),
                     Expanded(
                       child: Text(
                         correction.originalText,
@@ -270,11 +539,13 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         const Icon(
                           Icons.check_circle_outline,
                           color: Colors.green,
                         ),
+                        SizedBox(width: 8),
                         Expanded(
                           child: Text(
                             correction.correctedText,
@@ -283,7 +554,7 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 16),
                     Text(
                       correction.correctionReason,
                       style: const TextStyle(color: Colors.black),
