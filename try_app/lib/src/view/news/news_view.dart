@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-// import 'package:intl/intl.dart';
 
 import 'package:try_app/src/view/news/news_view_model.dart';
 import 'package:try_app/src/view/news/news_detail_view.dart';
@@ -26,7 +25,7 @@ class NewsViewState extends State<NewsView> {
     const subHeaderColor = Color(0xFF008F9C);
 
     return Padding(
-      padding: const EdgeInsets.all(16.0),
+      padding: const EdgeInsets.only(top: 0, left: 32, right: 32, bottom: 32),
       child: Consumer<NewsViewModel>(
         builder: (context, newsViewModel, child) {
           if (newsViewModel.newsList.isEmpty) {
@@ -36,11 +35,9 @@ class NewsViewState extends State<NewsView> {
               itemCount: newsViewModel.newsList.length,
               itemBuilder: (context, index) {
                 final news = newsViewModel.newsList[index];
-                // final date = DateTime.parse(news.newsDate);
-                // final formattedDate = DateFormat('MMM dd, yyyy').format(date);
 
                 return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 12.0),
+                  padding: const EdgeInsets.only(top: 32),
                   child: InkWell(
                     onTap: () {
                       Navigator.of(context).push(
@@ -49,61 +46,57 @@ class NewsViewState extends State<NewsView> {
                         ),
                       );
                     },
-                    child: Container(
-                      height: 150, // 고정 높이 설정
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      clipBehavior: Clip.antiAlias,
-                      child: Row(
-                        children: [
-                          Stack(
-                            children: [
-                              SizedBox(
-                                width: 120,
-                                height: 150,
-                                child: Image.network(
-                                  news.newsURL,
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                              const SizedBox(
-                                width: 120,
-                                height: 150,
-                              ),
-                            ],
-                          ),
-                          Expanded(
-                            child: Padding(
-                              padding: const EdgeInsets.all(16.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    news.newsCategory,
-                                    style: const TextStyle(
-                                      fontSize: 14,
-                                      fontFamily: 'Barlow',
-                                      color: subHeaderColor,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 8),
-                                  Text(
-                                    news.newsTitle,
-                                    style: const TextStyle(
-                                      fontSize: 17,
-                                      fontFamily: 'Merriweather',
-                                      fontWeight: FontWeight.bold,
-                                      color: textColor,
-                                    ),
-                                  ),
-                                ],
+                    child: Material(
+                      elevation: 0,
+                      borderRadius: BorderRadius.circular(12),
+                      child: Container(
+                        height: 160,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        clipBehavior: Clip.antiAlias,
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 120,
+                              height: 160,
+                              child: Image.network(
+                                news.newsURL,
+                                fit: BoxFit.cover,
                               ),
                             ),
-                          ),
-                        ],
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      news.newsCategory,
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        fontFamily: 'Barlow',
+                                        color: subHeaderColor,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Text(
+                                      news.newsTitle,
+                                      style: const TextStyle(
+                                        fontSize: 17,
+                                        fontFamily: 'Merriweather',
+                                        fontWeight: FontWeight.bold,
+                                        color: textColor,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
