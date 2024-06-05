@@ -1,11 +1,12 @@
 import 'dart:convert';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:try_app/src/model/task1_model.dart';
 import 'package:try_app/src/model/report_model.dart';
 
 class Task1Repository {
-  final String baseUrl = 'http://10.0.2.2:8080';
+  final String baseUrl = dotenv.env['BASE_URL']!;
 
   Future<Task1Model> fetchTask1Question(int taskId) async {
     final response = await http.get(Uri.parse('$baseUrl/task/1/$taskId'));

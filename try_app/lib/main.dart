@@ -1,3 +1,4 @@
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:try_app/src/repository/home_repository.dart';
@@ -27,7 +28,8 @@ import 'src/repository/news_repository.dart';
 import 'src/view/news/news_view_model.dart';
 import 'src/view/news/news_view.dart';
 
-void main() {
+void main() async {
+  await dotenv.load(fileName: ".env");
   runApp(
     MultiProvider(
       providers: [
