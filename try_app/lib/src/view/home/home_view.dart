@@ -51,83 +51,92 @@ class HomeViewState extends State<HomeView>
     const subHeaderColor = Color(0xFF008F9C);
 
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.all(32), // 패딩을 32로 변경
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(left: 0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: _buildGuideCard(
-                      iconPath: 'assets/images/timer.png',
-                      title: 'Test',
-                      description:
-                          'Practice English skills in a timed test environment.',
-                    ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 32), // 위아래 패딩만 적용
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 32), // 좌우 패딩 적용
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: _buildGuideCard(
+                          iconPath: 'assets/images/timer.png',
+                          title: 'Test',
+                          description:
+                              'Practice English skills in a timed test environment.',
+                        ),
+                      ),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: _buildGuideCard(
+                          iconPath: 'assets/images/news.png',
+                          title: 'News',
+                          description:
+                              'Learn English expressions through the latest news.',
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: _buildGuideCard(
-                      iconPath: 'assets/images/news.png',
-                      title: 'News',
-                      description:
-                          'Learn English expressions through the latest news.',
-                    ),
+                ),
+                const SizedBox(height: 32),
+                Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 48), // 좌우 패딩 적용
+                  child: Row(
+                    children: const [
+                      Expanded(
+                        child: Divider(
+                          thickness: 1,
+                          color: Color(0xFF008F9C),
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      Text(
+                        'Learning History',
+                        style: TextStyle(
+                          fontSize: 24, // 폰트 크기 24
+                          fontWeight: FontWeight.bold,
+                          color: Color(0xFF008F9C),
+                        ),
+                      ),
+                      SizedBox(width: 10),
+                      Expanded(
+                        child: Divider(
+                          thickness: 1,
+                          color: Color(0xFF008F9C),
+                        ),
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-            const SizedBox(height: 32),
-            Padding(
-              padding:
-                  const EdgeInsets.only(left: 16, right: 16, top: 0), // 패딩 수정
-              child: Row(
-                children: const [
-                  Expanded(
-                    child: Divider(
-                      thickness: 1,
-                      color: Color(0xFF008F9C),
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                  Text(
-                    'Learning History',
-                    style: TextStyle(
-                      fontSize: 24, // 폰트 크기 24
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF008F9C),
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: Divider(
-                      thickness: 1,
-                      color: Color(0xFF008F9C),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            const SizedBox(height: 32),
-            Expanded(
-              child: Consumer<HomeViewModel>(
-                builder: (context, model, child) {
-                  if (model.learningHistory.isEmpty) {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                  return Listener(
-                    onPointerUp: _handlePointerUp,
-                    child: NotificationListener(
-                      onNotification: _handleScrollNotifications,
-                      child: PageView.builder(
-                        controller: _pageController,
-                        itemCount: model.learningHistory.length,
-                        itemBuilder: (context, index) {
-                          final report = model.learningHistory[index];
-                          return _buildLearningCard(
+          ),
+          Expanded(
+            child: Consumer<HomeViewModel>(
+              builder: (context, model, child) {
+                if (model.learningHistory.isEmpty) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                return Listener(
+                  onPointerUp: _handlePointerUp,
+                  child: NotificationListener(
+                    onNotification: _handleScrollNotifications,
+                    child: PageView.builder(
+                      controller: _pageController,
+                      itemCount: model.learningHistory.length,
+                      itemBuilder: (context, index) {
+                        final report = model.learningHistory[index];
+                        return Padding(
+                          padding: const EdgeInsets.only(
+                              left: 8, right: 8, top: 0, bottom: 32),
+                          child: _buildLearningCard(
                             context,
                             report.taskType,
                             DateFormat('MMM dd, yyyy')
@@ -135,16 +144,16 @@ class HomeViewState extends State<HomeView>
                             report,
                             textColor: textColor,
                             subHeaderColor: subHeaderColor,
-                          );
-                        },
-                      ),
+                          ),
+                        );
+                      },
                     ),
-                  );
-                },
-              ),
+                  ),
+                );
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
