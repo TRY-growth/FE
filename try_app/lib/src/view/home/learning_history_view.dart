@@ -72,10 +72,10 @@ class _LearningHistoryViewState extends State<LearningHistoryView> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Center(
+        const Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            child: const Text(
+            padding: EdgeInsets.symmetric(vertical: 16),
+            child: Text(
               "Overall Feedback",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
@@ -140,10 +140,10 @@ class _LearningHistoryViewState extends State<LearningHistoryView> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Center(
+        const Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            child: const Text(
+            padding: EdgeInsets.symmetric(vertical: 16),
+            child: Text(
               "Tips",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
@@ -185,10 +185,10 @@ class _LearningHistoryViewState extends State<LearningHistoryView> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Center(
+        const Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            child: const Text(
+            padding: EdgeInsets.symmetric(vertical: 16),
+            child: Text(
               "Modified Answer",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),

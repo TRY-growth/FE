@@ -5,8 +5,8 @@ class SignupView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textColor = Color(0xFF210A3B);
-    final subHeaderColor = Color(0xFF008F9C);
+    const textColor = Color(0xFF210A3B);
+    const subHeaderColor = Color(0xFF008F9C);
     final emailController = TextEditingController();
     final passwordController = TextEditingController();
     final confirmPasswordController = TextEditingController();
@@ -34,7 +34,7 @@ class SignupView extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             TextField(
               controller: nicknameController,
               decoration: InputDecoration(
@@ -45,7 +45,7 @@ class SignupView extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             TextField(
               controller: passwordController,
               decoration: InputDecoration(
@@ -57,7 +57,7 @@ class SignupView extends StatelessWidget {
               ),
               obscureText: true,
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             TextField(
               controller: confirmPasswordController,
               decoration: InputDecoration(
@@ -69,19 +69,20 @@ class SignupView extends StatelessWidget {
               ),
               obscureText: true,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: subHeaderColor,
-                padding: EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
               ),
-              child: Text(
+              child: const Text(
                 'Sign Up',
                 style: TextStyle(color: Colors.white, fontSize: 18),
               ),

@@ -28,7 +28,7 @@ class _BaseViewState extends State<BaseView> {
 
   @override
   Widget build(BuildContext context) {
-    final textColor = Color(0xFF210A3B);
+    const textColor = Color(0xFF210A3B);
 
     return Scaffold(
       appBar: AppBar(
@@ -44,7 +44,7 @@ class _BaseViewState extends State<BaseView> {
                 fontFamily: 'Merriweather',
               ),
             ),
-            Spacer(),
+            const Spacer(),
             GestureDetector(
               onTap: () => _showProfileDialog(context),
               child: Icon(Icons.account_circle, color: textColor),
@@ -67,7 +67,7 @@ class _BaseViewState extends State<BaseView> {
         onChange: _handleNavigationChange,
         scaleFactor: 1.5,
         defaultIndex: 1,
-        style: FluidNavBarStyle(
+        style: const FluidNavBarStyle(
           // iconUnselectedForegroundColor: textColor,
           iconSelectedForegroundColor: Color(0xFF008F9C),
         ),

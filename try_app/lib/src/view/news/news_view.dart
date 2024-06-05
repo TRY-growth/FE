@@ -22,8 +22,8 @@ class _NewsViewState extends State<NewsView> {
 
   @override
   Widget build(BuildContext context) {
-    final textColor = Color(0xFF210A3B);
-    final subHeaderColor = Color(0xFF008F9C);
+    const textColor = Color(0xFF210A3B);
+    const subHeaderColor = Color(0xFF008F9C);
 
     return Padding(
       padding: const EdgeInsets.all(16.0),
@@ -60,7 +60,7 @@ class _NewsViewState extends State<NewsView> {
                         children: [
                           Stack(
                             children: [
-                              Container(
+                              SizedBox(
                                 width: 120,
                                 height: 150,
                                 child: Image.network(
@@ -68,7 +68,7 @@ class _NewsViewState extends State<NewsView> {
                                   fit: BoxFit.cover,
                                 ),
                               ),
-                              Container(
+                              const SizedBox(
                                 width: 120,
                                 height: 150,
                               ),

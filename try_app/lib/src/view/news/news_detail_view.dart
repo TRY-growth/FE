@@ -26,8 +26,8 @@ class NewsDetailView extends StatelessWidget {
       ));
     }
 
-    final textColor = Color(0xFF210A3B);
-    final subHeaderColor = Color(0xFF008F9C);
+    const textColor = Color(0xFF210A3B);
+    const subHeaderColor = Color(0xFF008F9C);
 
     return Scaffold(
       appBar: AppBar(
@@ -36,8 +36,9 @@ class NewsDetailView extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Container(
-          color: Color(0xFFFFFFFF),
-          padding: EdgeInsets.only(left: 37, right: 37, top: 30, bottom: 37),
+          color: const Color(0xFFFFFFFF),
+          padding:
+              const EdgeInsets.only(left: 37, right: 37, top: 30, bottom: 37),
           // padding: EdgeInsets.all(37),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,7 +54,7 @@ class NewsDetailView extends StatelessWidget {
                   decoration: TextDecoration.none,
                 ),
               ),
-              Padding(padding: EdgeInsets.only(top: 24)),
+              const Padding(padding: EdgeInsets.only(top: 24)),
               Text(
                 DateFormat('MMM dd, yyyy')
                     .format(DateTime.parse(news.newsDate)),
@@ -64,14 +65,14 @@ class NewsDetailView extends StatelessWidget {
                   decoration: TextDecoration.none,
                 ),
               ),
-              Padding(padding: EdgeInsets.only(top: 12)),
+              const Padding(padding: EdgeInsets.only(top: 12)),
               Container(
                 height: 1,
-                color: Color(0x512B777E),
+                color: const Color(0x512B777E),
               ),
-              Padding(padding: EdgeInsets.only(top: 24)),
+              const Padding(padding: EdgeInsets.only(top: 24)),
               Image.network(news.newsURL, fit: BoxFit.cover),
-              Padding(padding: EdgeInsets.only(top: 24)),
+              const Padding(padding: EdgeInsets.only(top: 24)),
               DropCapText(
                 news.newsArticle,
                 mode: DropCapMode.baseline,
@@ -90,7 +91,7 @@ class NewsDetailView extends StatelessWidget {
                   decoration: TextDecoration.none,
                 ),
               ),
-              Padding(padding: EdgeInsets.only(top: 32)),
+              const Padding(padding: EdgeInsets.only(top: 32)),
               Center(
                 child: SizedBox(
                   width: double.infinity, // 버튼 폭을 본문 폭과 동일하게 설정
@@ -98,13 +99,13 @@ class NewsDetailView extends StatelessWidget {
                     onPressed: startLearning,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: subHeaderColor,
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 32, vertical: 12),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),
                     ),
-                    child: Text(
+                    child: const Text(
                       "Start Learning",
                       style: TextStyle(
                         fontSize: 18,

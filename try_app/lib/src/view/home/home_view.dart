@@ -13,8 +13,8 @@ class HomeView extends StatelessWidget {
     final homeViewModel = Provider.of<HomeViewModel>(context, listen: false);
     homeViewModel.fetchLearningHistory();
 
-    final textColor = Color(0xFF210A3B);
-    final subHeaderColor = Color(0xFF008F9C);
+    const textColor = Color(0xFF210A3B);
+    const subHeaderColor = Color(0xFF008F9C);
 
     return Scaffold(
       body: Padding(
@@ -53,8 +53,8 @@ class HomeView extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 20),
-            Center(
-              child: const Text(
+            const Center(
+              child: Text(
                 'Learning History',
                 style: TextStyle(
                   fontSize: 20,

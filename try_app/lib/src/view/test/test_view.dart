@@ -10,8 +10,8 @@ class TestView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textColor = Color(0xFF210A3B);
-    final subHeaderColor = Color(0xFF008F9C);
+    const textColor = Color(0xFF210A3B);
+    const subHeaderColor = Color(0xFF008F9C);
 
     return Scaffold(
       body: Padding(
@@ -111,7 +111,7 @@ class TestView extends StatelessWidget {
                   ),
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               Align(
                 alignment: Alignment.bottomLeft,
                 child: Text(

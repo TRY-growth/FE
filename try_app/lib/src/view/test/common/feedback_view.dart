@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:try_app/src/model/report_model.dart';
 import 'package:diff_match_patch/diff_match_patch.dart';
 
@@ -71,10 +70,10 @@ class _FeedbackViewState extends State<FeedbackView> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Center(
+        const Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            child: const Text(
+            padding: EdgeInsets.symmetric(vertical: 16),
+            child: Text(
               "Overall Feedback",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
@@ -92,7 +91,7 @@ class _FeedbackViewState extends State<FeedbackView> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("${feedback.overallFeedback}",
+                      Text(feedback.overallFeedback,
                           style: const TextStyle(fontWeight: FontWeight.bold)),
                       _buildExpandableFeedbackSection(
                           "Language Use", feedback.languageUseFeedback),
@@ -130,10 +129,10 @@ class _FeedbackViewState extends State<FeedbackView> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Center(
+        const Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            child: const Text(
+            padding: EdgeInsets.symmetric(vertical: 16),
+            child: Text(
               "Tips",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
@@ -173,10 +172,10 @@ class _FeedbackViewState extends State<FeedbackView> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Center(
+        const Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            child: const Text(
+            padding: EdgeInsets.symmetric(vertical: 16),
+            child: Text(
               "Detail Feedback",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
@@ -240,10 +239,10 @@ class PrettyDiffText extends StatelessWidget {
   final String newText;
 
   const PrettyDiffText({
-    Key? key,
+    super.key,
     required this.oldText,
     required this.newText,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
