@@ -111,17 +111,23 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
   }
 
   Widget _buildScoreIcons(int score) {
-    List<Widget> icons = [];
-    for (int i = 0; i < 4; i++) {
-      icons.add(Image.asset(
-        'assets/images/score.png',
-        color: i < score ? null : Colors.grey.shade300,
-        height: 50,
-      ));
-    }
-    return Row(
+    return Column(
       mainAxisAlignment: MainAxisAlignment.center,
-      children: icons,
+      children: [
+        Image.asset(
+          'assets/images/$score.png',
+          height: 100,
+        ),
+        SizedBox(height: 16),
+        Text(
+          '$score / 4',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFF008F9C),
+          ),
+        ),
+      ],
     );
   }
 
@@ -340,7 +346,7 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
                     height: 40,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
-                      color: Colors.teal,
+                      color: Color(0xFF008F9C),
                     ),
                   ),
                 ),
