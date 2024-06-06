@@ -128,7 +128,7 @@ class QuestionWidgetState extends State<QuestionWidget> {
             widget.onSubmit(_controller.text);
           },
           style: ElevatedButton.styleFrom(
-            backgroundColor: Color(
+            backgroundColor: const Color(
                 0xFF008F9C), // Use the same color as the "Start Learning" button
             padding: const EdgeInsets.symmetric(horizontal: 94, vertical: 12),
             shape: RoundedRectangleBorder(

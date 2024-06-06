@@ -22,7 +22,7 @@ class FeedbackViewState extends State<FeedbackView> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text("Feedback",
+        title: const Text("Feedback",
             style: TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,

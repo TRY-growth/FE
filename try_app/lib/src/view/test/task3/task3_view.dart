@@ -3,12 +3,10 @@ import 'package:provider/provider.dart';
 
 import 'package:try_app/src/view/test/common/feedback_view.dart';
 import 'package:try_app/src/view/test/common/loading_view.dart';
-
 import 'package:try_app/src/view/test/common/microphone_test_widget.dart';
 import 'package:try_app/src/view/test/common/listening_material_widget.dart';
 import 'package:try_app/src/view/test/common/reading_material_widget.dart';
 import 'package:try_app/src/view/test/common/question_widget.dart';
-
 import 'package:try_app/src/view/test/task3/task3_view_model.dart';
 
 class Task3View extends StatefulWidget {
@@ -55,7 +53,7 @@ class Task3ViewState extends State<Task3View> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text(
+        title: const Text(
           "Task 3",
           style: TextStyle(
             fontSize: 24,

@@ -51,7 +51,7 @@ class Task1ViewState extends State<Task1View> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text(
+        title: const Text(
           "Task 1",
           style: TextStyle(
             fontSize: 24,

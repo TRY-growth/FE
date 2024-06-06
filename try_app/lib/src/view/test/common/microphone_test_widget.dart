@@ -40,7 +40,7 @@ class MicrophoneTestWidgetState extends State<MicrophoneTestWidget> {
         const SizedBox(height: 20),
         const Text(
           "Press the button below\nto allow microphone access,\nor\npress the next button\nto answer with text.",
-          style: const TextStyle(
+          style: TextStyle(
             fontSize: 18,
             fontFamily: 'Barlow',
             letterSpacing: 0.5,

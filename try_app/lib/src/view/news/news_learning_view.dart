@@ -41,7 +41,7 @@ class NewsLearningViewState extends State<NewsLearningView> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        title: Text(
+        title: const Text(
           "News Learning",
           style: TextStyle(
             fontSize: 24,
