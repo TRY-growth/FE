@@ -93,11 +93,22 @@ class QuestionWidgetState extends State<QuestionWidget> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        const SizedBox(height: 20),
         Text(
           widget.question,
-          style: const TextStyle(fontSize: 18),
+          // style: const TextStyle(fontSize: 18),
+
+          style: const TextStyle(
+            fontSize: 18,
+            fontFamily: 'Barlow',
+            letterSpacing: 0.5,
+            height: 1.5,
+            fontWeight: FontWeight.w500,
+            color: Color(0xFF210A3B),
+            decoration: TextDecoration.none,
+          ),
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 32),
         ElevatedButton(
           onPressed: _isRecording ? _stopListening : _startListening,
           child: Icon(_isRecording ? Icons.mic : Icons.mic_none),
@@ -111,12 +122,28 @@ class QuestionWidgetState extends State<QuestionWidget> {
             hintText: 'Your response',
           ),
         ),
-        const SizedBox(height: 20),
+        const SizedBox(height: 32),
         ElevatedButton(
           onPressed: () {
             widget.onSubmit(_controller.text);
           },
-          child: const Text("Submit Answer"),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Color(
+                0xFF008F9C), // Use the same color as the "Start Learning" button
+            padding: const EdgeInsets.symmetric(horizontal: 94, vertical: 12),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+          child: const Text(
+            "Submit Answer",
+            style: TextStyle(
+              fontSize: 18,
+              fontFamily: 'Merriweather',
+              fontWeight: FontWeight.bold,
+              color: Colors.white,
+            ),
+          ),
         ),
       ],
     );

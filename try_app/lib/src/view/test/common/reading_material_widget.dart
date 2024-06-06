@@ -11,10 +11,20 @@ class ReadingMaterialWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        const SizedBox(height: 20),
         Text(
           content,
-          style: const TextStyle(fontSize: 18),
+          style: const TextStyle(
+            fontSize: 18,
+            fontFamily: 'Barlow',
+            letterSpacing: 0.5,
+            height: 1.5,
+            fontWeight: FontWeight.w500,
+            color: Color(0xFF210A3B),
+            decoration: TextDecoration.none,
+          ),
         ),
+        const SizedBox(height: 20),
       ],
     );
   }

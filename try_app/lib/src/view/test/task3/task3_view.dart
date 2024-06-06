@@ -74,12 +74,22 @@ class Task3ViewState extends State<Task3View> {
               onStepContinue: _currentStep == 3 ? null : _nextStep,
               steps: [
                 Step(
-                  title: const Text("Microphone Access"),
+                  title: const Text("Microphone Access",
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF210A3B),
+                      )),
                   content: MicrophoneTestWidget(onNext: _nextStep),
                   isActive: _currentStep == 0,
                 ),
                 Step(
-                  title: const Text("Passage"),
+                  title: const Text("Passage",
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF210A3B),
+                      )),
                   content: ReadingMaterialWidget(
                     content: task3ViewModel.currentQuestion!.passage,
                     onNext: _nextStep,
@@ -87,7 +97,12 @@ class Task3ViewState extends State<Task3View> {
                   isActive: _currentStep == 1,
                 ),
                 Step(
-                  title: const Text("Discussion"),
+                  title: const Text("Discussion",
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF210A3B),
+                      )),
                   content: ListeningMaterialWidget(
                     content: task3ViewModel.currentQuestion!.discussion,
                     onNext: _nextStep,
@@ -95,7 +110,12 @@ class Task3ViewState extends State<Task3View> {
                   isActive: _currentStep == 2,
                 ),
                 Step(
-                  title: const Text("Question"),
+                  title: const Text("Question",
+                      style: TextStyle(
+                        fontSize: 17,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF210A3B),
+                      )),
                   content: QuestionWidget(
                     question: task3ViewModel.currentQuestion!.question,
                     onSubmit: _submitAnswer,
