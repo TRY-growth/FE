@@ -53,8 +53,18 @@ class Task4ViewState extends State<Task4View> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Task 4"),
+        backgroundColor: Colors.white,
+        title: Text(
+          "Task 4",
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFF210A3B),
+            fontFamily: 'Merriweather',
+          ),
+        ),
         centerTitle: true,
+        automaticallyImplyLeading: true,
       ),
       body: task4ViewModel.currentQuestion == null
           ? const Center(child: CircularProgressIndicator())
@@ -63,7 +73,7 @@ class Task4ViewState extends State<Task4View> {
               onStepContinue: _currentStep == 2 ? null : _nextStep,
               steps: [
                 Step(
-                  title: const Text("Microphone Test"),
+                  title: const Text("Microphone Access"),
                   content: MicrophoneTestWidget(onNext: _nextStep),
                   isActive: _currentStep == 0,
                 ),

@@ -54,8 +54,18 @@ class Task2ViewState extends State<Task2View> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Task 2"),
+        backgroundColor: Colors.white,
+        title: Text(
+          "Task 2",
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFF210A3B),
+            fontFamily: 'Merriweather',
+          ),
+        ),
         centerTitle: true,
+        automaticallyImplyLeading: true,
       ),
       body: task2ViewModel.currentQuestion == null
           ? const Center(child: CircularProgressIndicator())
@@ -64,12 +74,12 @@ class Task2ViewState extends State<Task2View> {
               onStepContinue: _currentStep == 3 ? null : _nextStep,
               steps: [
                 Step(
-                  title: const Text("Microphone Test"),
+                  title: const Text("Microphone Access"),
                   content: MicrophoneTestWidget(onNext: _nextStep),
                   isActive: _currentStep == 0,
                 ),
                 Step(
-                  title: const Text("Reading Material"),
+                  title: const Text("Passage"),
                   content: ReadingMaterialWidget(
                     content: task2ViewModel.currentQuestion!.passage,
                     onNext: _nextStep,
@@ -77,14 +87,14 @@ class Task2ViewState extends State<Task2View> {
                   isActive: _currentStep == 1,
                 ),
                 Step(
-                  title: const Text("Listening Material"),
+                  title: const Text("Discussion"),
                   content: ListeningMaterialWidget(
                       content: task2ViewModel.currentQuestion!.discussion,
                       onNext: _nextStep),
                   isActive: _currentStep == 2,
                 ),
                 Step(
-                  title: const Text("Final Question"),
+                  title: const Text("Question"),
                   content: QuestionWidget(
                     question: task2ViewModel.currentQuestion!.question,
                     onSubmit: _submitAnswer,

@@ -40,20 +40,30 @@ class NewsLearningViewState extends State<NewsLearningView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("News Learning"),
+        backgroundColor: Colors.white,
+        title: Text(
+          "News Learning",
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFF210A3B),
+            fontFamily: 'Merriweather',
+          ),
+        ),
         centerTitle: true,
+        automaticallyImplyLeading: true,
       ),
       body: Stepper(
         currentStep: _currentStep,
         onStepContinue: _currentStep == 1 ? null : _nextStep,
         steps: [
           Step(
-            title: const Text("Microphone Test"),
+            title: const Text("Microphone Access"),
             content: MicrophoneTestWidget(onNext: _nextStep),
             isActive: _currentStep == 0,
           ),
           Step(
-            title: const Text("Final Question"),
+            title: const Text("Question"),
             content: QuestionWidget(
               question: widget.report.newsQuestion!,
               onSubmit: _submitAnswer,

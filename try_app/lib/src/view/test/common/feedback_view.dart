@@ -20,12 +20,6 @@ class FeedbackViewState extends State<FeedbackView> {
     final detailFeedback = widget.report.detailFeedback;
 
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text("Feedback"),
-      //   centerTitle: true,
-      //   automaticallyImplyLeading: false,
-      // ),
-
       appBar: AppBar(
         backgroundColor: Colors.white,
         title: Text("Feedback",

@@ -50,8 +50,18 @@ class Task1ViewState extends State<Task1View> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Task 1"),
+        backgroundColor: Colors.white,
+        title: Text(
+          "Task 1",
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFF210A3B),
+            fontFamily: 'Merriweather',
+          ),
+        ),
         centerTitle: true,
+        automaticallyImplyLeading: true,
       ),
       body: task1ViewModel.currentQuestion == null
           ? const Center(child: CircularProgressIndicator())
@@ -60,14 +70,14 @@ class Task1ViewState extends State<Task1View> {
               onStepContinue: _currentStep == 1 ? null : _nextStep,
               steps: [
                 Step(
-                  title: const Text("Microphone Test"),
+                  title: const Text("Microphone Access"),
                   content: MicrophoneTestWidget(
                     onNext: _nextStep,
                   ),
                   isActive: _currentStep == 0,
                 ),
                 Step(
-                  title: const Text("Final Question"),
+                  title: const Text("Question"),
                   content: QuestionWidget(
                     question: task1ViewModel.currentQuestion!.question,
                     onSubmit: _submitAnswer,
