@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'package:try_app/src/view/test/task1/task1_view_model.dart';
-
-import 'package:try_app/src/view/test/common/feedback_view.dart';
-import 'package:try_app/src/view/test/common/loading_view.dart';
-
 import 'package:try_app/src/view/test/common/microphone_test_widget.dart';
 import 'package:try_app/src/view/test/common/question_widget.dart';
+import 'package:try_app/src/view/test/common/loading_view.dart';
+import 'package:try_app/src/view/test/common/feedback_view.dart';
 
 class Task1View extends StatefulWidget {
   const Task1View({super.key});
@@ -28,6 +25,7 @@ class Task1ViewState extends State<Task1View> {
   void _fetchQuestion() async {
     final task1ViewModel = Provider.of<Task1ViewModel>(context, listen: false);
     await task1ViewModel.fetchTask1Question(1);
+    setState(() {});
   }
 
   void _nextStep() {
@@ -63,7 +61,9 @@ class Task1ViewState extends State<Task1View> {
               steps: [
                 Step(
                   title: const Text("Microphone Test"),
-                  content: MicrophoneTestWidget(onNext: _nextStep),
+                  content: MicrophoneTestWidget(
+                    onNext: _nextStep,
+                  ),
                   isActive: _currentStep == 0,
                 ),
                 Step(

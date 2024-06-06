@@ -4,10 +4,10 @@ class LoginView extends StatefulWidget {
   const LoginView({super.key});
 
   @override
-  _LoginViewState createState() => _LoginViewState();
+  LoginViewState createState() => LoginViewState();
 }
 
-class _LoginViewState extends State<LoginView> {
+class LoginViewState extends State<LoginView> {
   bool isLogin = true;
 
   @override
@@ -38,7 +38,8 @@ class _LoginViewState extends State<LoginView> {
                       child: Container(
                         padding: const EdgeInsets.symmetric(vertical: 12),
                         decoration: BoxDecoration(
-                          color: isLogin ? Color(0xFF008F9C) : Colors.white,
+                          color:
+                              isLogin ? const Color(0xFF008F9C) : Colors.white,
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Text(
@@ -59,7 +60,8 @@ class _LoginViewState extends State<LoginView> {
                       child: Container(
                         padding: const EdgeInsets.symmetric(vertical: 12),
                         decoration: BoxDecoration(
-                          color: isLogin ? Colors.white : Color(0xFF008F9C),
+                          color:
+                              isLogin ? Colors.white : const Color(0xFF008F9C),
                           borderRadius: BorderRadius.circular(20),
                         ),
                         child: Text(
@@ -199,8 +201,8 @@ Widget loginButton(BuildContext context) {
       Navigator.pushNamed(context, '/home');
     },
     style: ElevatedButton.styleFrom(
-      minimumSize: Size(double.infinity, 50),
-      backgroundColor: Color(0xFF008F9C),
+      minimumSize: const Size(double.infinity, 50),
+      backgroundColor: const Color(0xFF008F9C),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),
@@ -218,8 +220,8 @@ Widget signupButton(BuildContext context) {
       Navigator.popAndPushNamed(context, '/');
     },
     style: ElevatedButton.styleFrom(
-      minimumSize: Size(double.infinity, 50),
-      backgroundColor: Color(0xFF008F9C),
+      minimumSize: const Size(double.infinity, 50),
+      backgroundColor: const Color(0xFF008F9C),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),
