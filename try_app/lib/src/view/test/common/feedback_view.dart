@@ -12,35 +12,70 @@ class FeedbackView extends StatefulWidget {
 }
 
 class FeedbackViewState extends State<FeedbackView> {
+  bool _showModifiedAnswer = true;
+
   @override
   Widget build(BuildContext context) {
     final totalFeedback = widget.report.totalFeedback;
     final detailFeedback = widget.report.detailFeedback;
 
     return Scaffold(
+      // appBar: AppBar(
+      //   title: const Text("Feedback"),
+      //   centerTitle: true,
+      //   automaticallyImplyLeading: false,
+      // ),
+
       appBar: AppBar(
-        title: const Text("Feedback"),
+        backgroundColor: Colors.white,
+        title: Text("Feedback",
+            style: TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Color(0xFF210A3B),
+              fontFamily: 'Merriweather',
+            )),
         centerTitle: true,
         automaticallyImplyLeading: false,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
+        padding:
+            const EdgeInsets.only(left: 32, right: 32, top: 32, bottom: 32),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _buildScoreCard(totalFeedback!),
             _buildOverallFeedback(totalFeedback),
             _buildTips(totalFeedback),
-            _buildSubmissionComparison(widget.report.submitAnswer!,
-                widget.report.detailFeedbackModifiedAnswer!),
-            _buildDetailFeedbackSection(detailFeedback!),
+            _buildDetailFeedbackHeader(),
+            _buildAnswerSection(widget.report.detailFeedbackModifiedAnswer!,
+                widget.report.submitAnswer!),
+            ..._buildDetailFeedbackCards(detailFeedback!),
             const SizedBox(height: 20),
             Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, '/home');
-                },
-                child: const Text("Go to Home"),
+              child: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/home');
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF008F9C),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 32, vertical: 12),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: const Text(
+                    "Go to Home",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
               ),
             ),
           ],
@@ -50,19 +85,63 @@ class FeedbackViewState extends State<FeedbackView> {
   }
 
   Widget _buildScoreCard(TotalFeedback totalFeedback) {
-    return Card(
-      margin: const EdgeInsets.symmetric(vertical: 8),
-      child: ListTile(
-        title: const Text(
-          "Score",
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+    return Column(
+      children: [
+        const Padding(
+          padding: EdgeInsets.only(left: 16, right: 16, top: 0, bottom: 24),
+          child: Row(
+            children: [
+              Expanded(
+                child: Divider(
+                  thickness: 1,
+                  color: Color(0xFF008F9C),
+                ),
+              ),
+              SizedBox(width: 10),
+              Text(
+                'Score',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Merriweather',
+                  color: Color(0xFF008F9C),
+                ),
+              ),
+              SizedBox(width: 10),
+              Expanded(
+                child: Divider(
+                  thickness: 1,
+                  color: Color(0xFF008F9C),
+                ),
+              ),
+            ],
+          ),
         ),
-        subtitle: Text(
-          "${totalFeedback.score} / 4",
-          style: const TextStyle(fontSize: 16),
-          textAlign: TextAlign.center,
+        _buildScoreIcons(int.parse(totalFeedback.score)),
+        const SizedBox(height: 20),
+      ],
+    );
+  }
+
+  Widget _buildScoreIcons(int score) {
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Image.asset(
+          'assets/images/$score.png',
+          height: 100,
         ),
-      ),
+        const SizedBox(height: 16),
+        Text(
+          '$score / 4',
+          style: const TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            // fontFamily: 'Merriweather',
+            color: Color(0xFF008F9C),
+          ),
+        ),
+      ],
     );
   }
 
@@ -72,10 +151,33 @@ class FeedbackViewState extends State<FeedbackView> {
       children: [
         const Center(
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 16),
-            child: Text(
-              "Overall Feedback",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            padding: EdgeInsets.only(left: 16, right: 16, top: 20, bottom: 32),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Divider(
+                    thickness: 1,
+                    color: Color(0xFF008F9C),
+                  ),
+                ),
+                SizedBox(width: 10),
+                Text(
+                  'Overall Feedback',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Merriweather',
+                    color: Color(0xFF008F9C),
+                  ),
+                ),
+                SizedBox(width: 10),
+                Expanded(
+                  child: Divider(
+                    thickness: 1,
+                    color: Color(0xFF008F9C),
+                  ),
+                ),
+              ],
             ),
           ),
         ),
@@ -84,19 +186,34 @@ class FeedbackViewState extends State<FeedbackView> {
           child: Row(
             children: totalFeedback.feedback.map((feedback) {
               return Card(
-                margin: const EdgeInsets.symmetric(horizontal: 4),
+                color: Colors.white,
+                elevation: 0,
+                margin: const EdgeInsets.symmetric(horizontal: 0),
                 child: Container(
-                  width: 366,
-                  padding: const EdgeInsets.all(8),
+                  width: MediaQuery.of(context).size.width - 64,
+                  padding: const EdgeInsets.all(32),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(feedback.overallFeedback,
-                          style: const TextStyle(fontWeight: FontWeight.bold)),
+                      Text(
+                        feedback.overallFeedback,
+                        style: const TextStyle(
+                          // fontWeight: FontWeight.bold,
+                          fontFamily: 'Barlow',
+                          fontSize: 17,
+                          color: Color(0xFF210A3B),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
                       _buildExpandableFeedbackSection(
-                          "Language Use", feedback.languageUseFeedback),
-                      _buildExpandableFeedbackSection("Topic Development",
-                          feedback.topicDevelopmentFeedback),
+                        "Language Use",
+                        feedback.languageUseFeedback,
+                      ),
+                      const SizedBox(height: 16),
+                      _buildExpandableFeedbackSection(
+                        "Topic Development",
+                        feedback.topicDevelopmentFeedback,
+                      ),
                     ],
                   ),
                 ),
@@ -110,11 +227,26 @@ class FeedbackViewState extends State<FeedbackView> {
 
   Widget _buildExpandableFeedbackSection(String title, String feedback) {
     return ExpansionTile(
-      title: Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+      title: Text(
+        title,
+        style: const TextStyle(
+          fontWeight: FontWeight.bold,
+          fontFamily: 'Barlow',
+          fontSize: 18,
+          color: Color(0xFF210A3B),
+        ),
+      ),
       children: [
         Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(feedback),
+          padding: const EdgeInsets.all(16),
+          child: Text(
+            feedback,
+            style: const TextStyle(
+              fontSize: 16,
+              fontFamily: 'Barlow',
+              color: Color(0xFF210A3B),
+            ),
+          ),
         ),
       ],
     );
@@ -130,32 +262,69 @@ class FeedbackViewState extends State<FeedbackView> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Center(
-          child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 16),
-            child: Text(
-              "Tips",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-            ),
+            child: Padding(
+          padding: EdgeInsets.only(left: 16, right: 16, top: 40, bottom: 36),
+          child: Row(
+            children: [
+              Expanded(
+                child: Divider(
+                  thickness: 1,
+                  color: Color(0xFF008F9C),
+                ),
+              ),
+              SizedBox(width: 10),
+              Text(
+                'Tips',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Merriweather',
+                  color: Color(0xFF008F9C),
+                ),
+              ),
+              SizedBox(width: 10),
+              Expanded(
+                child: Divider(
+                  thickness: 1,
+                  color: Color(0xFF008F9C),
+                ),
+              ),
+            ],
           ),
-        ),
-        const SizedBox(height: 8),
+        )),
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
             children: allTips.map((tip) {
               return Card(
-                margin: const EdgeInsets.symmetric(horizontal: 4),
+                color: Colors.white,
+                elevation: 0,
+                margin: const EdgeInsets.symmetric(horizontal: 16),
                 child: Container(
-                  width: 300,
-                  height: 250, // 높이를 고정
-                  padding: const EdgeInsets.all(8),
+                  width: 250,
+                  height: 400,
+                  padding: const EdgeInsets.all(32),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(tip.subheading,
-                          style: const TextStyle(fontWeight: FontWeight.bold)),
-                      const SizedBox(height: 8),
-                      Text(tip.feedback),
+                      Text(
+                        tip.subheading,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Barlow',
+                          fontSize: 18,
+                          color: Color(0xFF210A3B),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      Text(
+                        tip.feedback,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          fontFamily: 'Barlow',
+                          color: Color(0xFF210A3B),
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -167,119 +336,313 @@ class FeedbackViewState extends State<FeedbackView> {
     );
   }
 
-  Widget _buildSubmissionComparison(
-      String submitAnswer, String modifiedAnswer) {
+  Widget _buildDetailFeedbackHeader() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Center(
           child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 16),
-            child: Text(
-              "Detail Feedback",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            padding: EdgeInsets.only(left: 16, right: 16, top: 40, bottom: 36),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Divider(
+                    thickness: 1,
+                    color: Color(0xFF008F9C),
+                  ),
+                ),
+                SizedBox(width: 10),
+                Text(
+                  'Detail Feedback',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Merriweather',
+                    color: Color(0xFF008F9C),
+                  ),
+                ),
+                SizedBox(width: 10),
+                Expanded(
+                  child: Divider(
+                    thickness: 1,
+                    color: Color(0xFF008F9C),
+                  ),
+                ),
+              ],
             ),
           ),
         ),
-        const SizedBox(height: 8),
-        Row(
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text("Submitted Answer",
-                      style: TextStyle(fontWeight: FontWeight.bold)),
-                  Text(submitAnswer),
-                ],
-              ),
+        Center(
+          child: Container(
+            width: 300,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(30),
+              color: Colors.white,
             ),
-            const SizedBox(width: 10),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text("Modified Answer",
-                      style: TextStyle(fontWeight: FontWeight.bold)),
-                  PrettyDiffText(
-                    oldText: submitAnswer,
-                    newText: modifiedAnswer,
+            child: Stack(
+              children: [
+                AnimatedAlign(
+                  alignment: _showModifiedAnswer
+                      ? Alignment.centerRight
+                      : Alignment.centerLeft,
+                  duration: const Duration(milliseconds: 300),
+                  child: Container(
+                    width: 150,
+                    height: 40,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      color: const Color(0xFF008F9C),
+                    ),
                   ),
-                ],
-              ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            _showModifiedAnswer = false;
+                          });
+                        },
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: Text(
+                              "Submitted",
+                              style: TextStyle(
+                                color: _showModifiedAnswer
+                                    ? Colors.black
+                                    : Colors.white,
+                                fontFamily: 'Barlow',
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Expanded(
+                      child: InkWell(
+                        onTap: () {
+                          setState(() {
+                            _showModifiedAnswer = true;
+                          });
+                        },
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 10),
+                            child: Text(
+                              "Modified",
+                              style: TextStyle(
+                                color: _showModifiedAnswer
+                                    ? Colors.white
+                                    : Colors.black,
+                                fontFamily: 'Barlow',
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ],
     );
   }
 
-  Widget _buildDetailFeedbackSection(DetailFeedback detailFeedback) {
+  Widget _buildAnswerSection(String modifiedAnswer, String submittedAnswer) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 26, bottom: 16, left: 16, right: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          if (_showModifiedAnswer)
+            _buildModifiedAnswerWithFeedback(modifiedAnswer, submittedAnswer)
+          else
+            _buildSubmittedAnswer(submittedAnswer, modifiedAnswer),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildModifiedAnswerWithFeedback(
+      String modifiedAnswer, String submittedAnswer) {
+    final diffs = _generateDiffs(submittedAnswer, modifiedAnswer);
+    final spans = <TextSpan>[];
+
+    for (var diff in diffs) {
+      if (diff.operation == DIFF_EQUAL || diff.operation == DIFF_INSERT) {
+        spans.add(TextSpan(
+          text: diff.text,
+          style: TextStyle(
+            color: diff.operation == DIFF_INSERT ? Colors.green : Colors.black,
+            fontFamily: 'Barlow',
+            fontSize: 17,
+          ),
+        ));
+      }
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 16),
-        ...detailFeedback.corrections.map((correction) {
-          return Card(
-            margin: const EdgeInsets.symmetric(vertical: 4),
-            child: ListTile(
-              title: Text("Original: ${correction.originalText}"),
-              subtitle: Text(
-                  "Correction: ${correction.correctedText}\nReason: ${correction.correctionReason}"),
-            ),
-          );
-        }),
+        RichText(
+          text: TextSpan(
+            children: spans,
+            style: const TextStyle(color: Colors.black),
+          ),
+        ),
       ],
     );
   }
-}
 
-class PrettyDiffText extends StatelessWidget {
-  final String oldText;
-  final String newText;
+  Widget _buildSubmittedAnswer(String submittedAnswer, String modifiedAnswer) {
+    final diffs = _generateDiffs(submittedAnswer, modifiedAnswer);
+    final spans = <TextSpan>[];
 
-  const PrettyDiffText({
-    super.key,
-    required this.oldText,
-    required this.newText,
-  });
+    for (var diff in diffs) {
+      if (diff.operation == DIFF_EQUAL || diff.operation == DIFF_DELETE) {
+        spans.add(TextSpan(
+          text: diff.text,
+          style: TextStyle(
+            color: diff.operation == DIFF_DELETE ? Colors.red : Colors.black,
+            fontFamily: 'Barlow',
+            fontSize: 17,
+          ),
+        ));
+      }
+    }
 
-  @override
-  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        RichText(
+          text: TextSpan(
+            children: spans,
+            style: const TextStyle(color: Colors.black),
+          ),
+        ),
+        // const SizedBox(height: 50),
+      ],
+    );
+  }
+
+  List<Diff> _generateDiffs(String text1, String text2) {
     DiffMatchPatch dmp = DiffMatchPatch();
-    List<Diff> diffs = dmp.diff(oldText, newText);
+    List<Diff> diffs = dmp.diff(text1, text2);
     dmp.diffCleanupSemantic(diffs);
+    return diffs;
+  }
 
-    final textSpans = <TextSpan>[];
+  List<InlineSpan> _buildTextSpans(List<Diff> diffs, bool isModified) {
+    final textSpans = <InlineSpan>[];
 
     for (var diff in diffs) {
       TextStyle? textStyle;
-      switch (diff.operation) {
-        case DIFF_INSERT:
-          textStyle = const TextStyle(
-            color: Colors.green,
-            // backgroundColor: Colors.lightGreen
-          );
-          break;
-        case DIFF_DELETE:
-          textStyle = const TextStyle(
-              color: Colors.red,
-              // backgroundColor: Colors.red,
-
-              decoration: TextDecoration.lineThrough);
-          break;
-        case DIFF_EQUAL:
-          textStyle = const TextStyle(backgroundColor: Colors.transparent);
-          break;
+      if (diff.operation == DIFF_INSERT) {
+        textStyle = isModified
+            ? const TextStyle(color: Colors.green)
+            : const TextStyle(color: Colors.red);
+      } else if (diff.operation == DIFF_DELETE) {
+        textStyle = isModified
+            ? const TextStyle(
+                color: Colors.red, decoration: TextDecoration.lineThrough)
+            : const TextStyle(color: Colors.green);
+      } else {
+        textStyle = const TextStyle(color: Colors.black);
       }
+
       textSpans.add(TextSpan(text: diff.text, style: textStyle));
     }
 
-    return RichText(
-      text: TextSpan(
-        children: textSpans,
-        style: const TextStyle(color: Colors.black),
-      ),
-    );
+    return textSpans;
+  }
+
+  List<Widget> _buildDetailFeedbackCards(DetailFeedback detailFeedback) {
+    return detailFeedback.corrections.map((correction) {
+      return Card(
+        color: Colors.white,
+        elevation: 0,
+        margin: const EdgeInsets.symmetric(vertical: 16),
+        child: Padding(
+          padding: const EdgeInsets.all(32),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                correction.category,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontFamily: 'Merriweather',
+                  fontSize: 16,
+                  color: Color(0xFF210A3B),
+                ),
+              ),
+              const SizedBox(height: 24),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Icon(
+                    Icons.error_outline,
+                    color: Colors.red,
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      correction.originalText,
+                      style: const TextStyle(
+                        color: Colors.red,
+                        fontFamily: 'Barlow',
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 12),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Icon(
+                    Icons.check_circle_outline,
+                    color: Colors.green,
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: Text(
+                      correction.correctedText,
+                      style: const TextStyle(
+                        color: Colors.green,
+                        fontFamily: 'Barlow',
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 24),
+              Text(
+                correction.correctionReason,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontFamily: 'Barlow',
+                  fontSize: 17,
+
+                  // fontWeight: FontWeight.bold,
+                ),
+              ),
+            ],
+          ),
+        ),
+      );
+    }).toList();
   }
 }
