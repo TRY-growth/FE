@@ -535,30 +535,6 @@ class FeedbackViewState extends State<FeedbackView> {
     return diffs;
   }
 
-  List<InlineSpan> _buildTextSpans(List<Diff> diffs, bool isModified) {
-    final textSpans = <InlineSpan>[];
-
-    for (var diff in diffs) {
-      TextStyle? textStyle;
-      if (diff.operation == DIFF_INSERT) {
-        textStyle = isModified
-            ? const TextStyle(color: Colors.green)
-            : const TextStyle(color: Colors.red);
-      } else if (diff.operation == DIFF_DELETE) {
-        textStyle = isModified
-            ? const TextStyle(
-                color: Colors.red, decoration: TextDecoration.lineThrough)
-            : const TextStyle(color: Colors.green);
-      } else {
-        textStyle = const TextStyle(color: Colors.black);
-      }
-
-      textSpans.add(TextSpan(text: diff.text, style: textStyle));
-    }
-
-    return textSpans;
-  }
-
   List<Widget> _buildDetailFeedbackCards(DetailFeedback detailFeedback) {
     return detailFeedback.corrections.map((correction) {
       return Card(

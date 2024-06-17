@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'login_view_model.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -8,10 +10,10 @@ class LoginView extends StatefulWidget {
 }
 
 class LoginViewState extends State<LoginView> {
-  bool isLogin = true;
-
   @override
   Widget build(BuildContext context) {
+    final viewModel = Provider.of<LoginViewModel>(context);
+
     return Scaffold(
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(horizontal: 32.0),
@@ -19,10 +21,7 @@ class LoginViewState extends State<LoginView> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             const SizedBox(height: 100),
-            Image.asset(
-              'assets/images/4.png',
-              height: 150,
-            ),
+            Image.asset('assets/images/4.png', height: 150),
             const SizedBox(height: 50),
             Container(
               decoration: BoxDecoration(
@@ -32,203 +31,138 @@ class LoginViewState extends State<LoginView> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () => setState(() => isLogin = true),
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        decoration: BoxDecoration(
-                          color:
-                              isLogin ? const Color(0xFF008F9C) : Colors.white,
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Text(
-                          'Login',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: isLogin ? Colors.white : Colors.black,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: GestureDetector(
-                      onTap: () => setState(() => isLogin = false),
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(vertical: 12),
-                        decoration: BoxDecoration(
-                          color:
-                              isLogin ? Colors.white : const Color(0xFF008F9C),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Text(
-                          'Sign-up',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: isLogin ? Colors.black : Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  _buildSwitchButton('Login', viewModel.isLogin, viewModel),
+                  _buildSwitchButton('Sign-up', !viewModel.isLogin, viewModel),
                 ],
               ),
             ),
             const SizedBox(height: 32),
-            isLogin ? buildLogin(context) : buildSignup(context),
-            const SizedBox(height: 32),
-            isLogin ? loginButton(context) : signupButton(context),
+            viewModel.isLogin
+                ? _buildLogin(context, viewModel)
+                : _buildSignup(context, viewModel),
+            const SizedBox(height: 12),
+            viewModel.isLogin
+                ? _loginButton(context, viewModel)
+                : _signupButton(context, viewModel),
           ],
         ),
       ),
     );
   }
-}
 
-Widget buildLogin(BuildContext context) {
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
+  Widget _buildSwitchButton(
+      String title, bool isActive, LoginViewModel viewModel) {
+    return Expanded(
+      child: GestureDetector(
+        onTap: () => viewModel.toggleLoginSignup(),
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          decoration: BoxDecoration(
+            color: isActive ? const Color(0xFF008F9C) : Colors.white,
+            borderRadius: BorderRadius.circular(20),
+          ),
+          child: Text(
+            title,
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              color: isActive ? Colors.white : Colors.black,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 
-  return Column(
-    key: const ValueKey('login'),
-    children: [
-      TextField(
-        controller: emailController,
-        decoration: InputDecoration(
-          labelText: 'Email',
-          filled: true,
-          fillColor: Colors.white,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide.none,
-          ),
+  Widget _buildLogin(BuildContext context, LoginViewModel viewModel) {
+    return Column(
+      children: [
+        TextField(
+          controller: viewModel.emailController,
+          decoration: _inputDecor('Email'),
         ),
-      ),
-      const SizedBox(height: 16),
-      TextField(
-        controller: passwordController,
-        decoration: InputDecoration(
-          labelText: 'Password',
-          filled: true,
-          fillColor: Colors.white,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide.none,
-          ),
+        const SizedBox(height: 16),
+        TextField(
+          controller: viewModel.passwordController,
+          obscureText: true,
+          decoration: _inputDecor('Password'),
         ),
-        obscureText: true,
-      ),
-      const SizedBox(height: 24),
-    ],
-  );
-}
+        const SizedBox(height: 24),
+      ],
+    );
+  }
 
-Widget buildSignup(BuildContext context) {
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  final confirmPasswordController = TextEditingController();
-  final nicknameController = TextEditingController();
+  Widget _buildSignup(BuildContext context, LoginViewModel viewModel) {
+    return Column(
+      children: [
+        TextField(
+          controller: viewModel.nicknameController,
+          decoration: _inputDecor('Nickname'),
+        ),
+        const SizedBox(height: 16),
+        TextField(
+          controller: viewModel.emailController,
+          decoration: _inputDecor('Email'),
+        ),
+        const SizedBox(height: 16),
+        TextField(
+          controller: viewModel.passwordController,
+          obscureText: true,
+          decoration: _inputDecor('Password'),
+        ),
+        const SizedBox(height: 16),
+        TextField(
+          controller: viewModel.confirmPasswordController,
+          obscureText: true,
+          decoration: _inputDecor('Confirm Password'),
+        ),
+        const SizedBox(height: 24),
+      ],
+    );
+  }
 
-  return Column(
-    key: const ValueKey('signup'),
-    children: [
-      TextField(
-        controller: nicknameController,
-        decoration: InputDecoration(
-          labelText: 'Name',
-          filled: true,
-          fillColor: Colors.white,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide.none,
-          ),
-        ),
-      ),
-      const SizedBox(height: 16),
-      TextField(
-        controller: emailController,
-        decoration: InputDecoration(
-          labelText: 'Email',
-          filled: true,
-          fillColor: Colors.white,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide.none,
-          ),
-        ),
-      ),
-      const SizedBox(height: 16),
-      TextField(
-        controller: passwordController,
-        decoration: InputDecoration(
-          labelText: 'Password',
-          filled: true,
-          fillColor: Colors.white,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide.none,
-          ),
-        ),
-        obscureText: true,
-      ),
-      const SizedBox(height: 16),
-      TextField(
-        controller: confirmPasswordController,
-        decoration: InputDecoration(
-          labelText: 'Confirm Password',
-          filled: true,
-          fillColor: Colors.white,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12),
-            borderSide: BorderSide.none,
-          ),
-        ),
-        obscureText: true,
-      ),
-      const SizedBox(height: 24),
-    ],
-  );
-}
-
-Widget loginButton(BuildContext context) {
-  return ElevatedButton(
-    onPressed: () {
-      Navigator.pushNamed(context, '/home');
-    },
-    style: ElevatedButton.styleFrom(
-      minimumSize: const Size(double.infinity, 50),
-      backgroundColor: const Color(0xFF008F9C),
-      shape: RoundedRectangleBorder(
+  InputDecoration _inputDecor(String label) {
+    return InputDecoration(
+      labelText: label,
+      filled: true,
+      fillColor: Colors.white,
+      border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(12),
+        borderSide: BorderSide.none,
       ),
-    ),
-    child: const Text(
-      'Login',
-      style: TextStyle(color: Colors.white, fontSize: 18),
-    ),
-  );
-}
+    );
+  }
 
-Widget signupButton(BuildContext context) {
-  return ElevatedButton(
-    onPressed: () {
-      Navigator.popAndPushNamed(context, '/');
-    },
-    style: ElevatedButton.styleFrom(
-      minimumSize: const Size(double.infinity, 50),
-      backgroundColor: const Color(0xFF008F9C),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
+  Widget _loginButton(BuildContext context, LoginViewModel viewModel) {
+    return ElevatedButton(
+      onPressed: () => viewModel.attemptLogin(context),
+      style: ElevatedButton.styleFrom(
+        minimumSize: const Size(double.infinity, 50),
+        backgroundColor: const Color(0xFF008F9C),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
       ),
-    ),
-    child: const Text(
-      'Sign-up',
-      style: TextStyle(color: Colors.white, fontSize: 18),
-    ),
-  );
+      child: const Text('Login',
+          style: TextStyle(color: Colors.white, fontSize: 18)),
+    );
+  }
+
+  Widget _signupButton(BuildContext context, LoginViewModel viewModel) {
+    return ElevatedButton(
+      onPressed: () {
+        viewModel.attemptSignup(context);
+      },
+      style: ElevatedButton.styleFrom(
+        minimumSize: const Size(double.infinity, 50),
+        backgroundColor: const Color(0xFF008F9C),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12),
+        ),
+      ),
+      child: const Text('Sign-up',
+          style: TextStyle(color: Colors.white, fontSize: 18)),
+    );
+  }
 }

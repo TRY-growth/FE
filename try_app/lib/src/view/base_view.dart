@@ -177,7 +177,7 @@ class BaseViewState extends State<BaseView> {
                     alignment: Alignment.centerRight,
                     child: TextButton(
                       onPressed: () {
-                        // 회원탈퇴 로직 추가
+                        //
                         Navigator.of(context).pop();
                       },
                       child: const Text(

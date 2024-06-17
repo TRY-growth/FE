@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 import 'src/view/auth/login_view.dart';
+import 'src/view/auth/login_view_model.dart';
 
 import 'src/view/base_view.dart';
 
@@ -32,6 +33,7 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (_) => LoginViewModel()),
         ChangeNotifierProvider(
             create: (_) => HomeViewModel(homeRepository: HomeRepository())),
         ChangeNotifierProvider(
