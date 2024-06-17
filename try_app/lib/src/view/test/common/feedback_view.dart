@@ -313,7 +313,7 @@ class FeedbackViewState extends State<FeedbackView> {
                       Text(
                         tip.feedback,
                         style: const TextStyle(
-                          fontSize: 16,
+                          fontSize: 15.5,
                           fontFamily: 'Barlow',
                           color: Color(0xFF210A3B),
                         ),

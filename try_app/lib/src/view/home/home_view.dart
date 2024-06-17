@@ -120,7 +120,24 @@ class HomeViewState extends State<HomeView>
             child: Consumer<HomeViewModel>(
               builder: (context, model, child) {
                 if (model.learningHistory.isEmpty) {
-                  return const Center(child: CircularProgressIndicator());
+                  return Center(
+                    child: Column(
+                      children: [
+                        SizedBox(height: 24),
+                        Image.asset(
+                          'assets/images/score.png',
+                          // color: Colors.grey,
+                          height: 150,
+                        ),
+                        SizedBox(height: 20),
+                        Text(
+                          'Your journey starts here.\nTry learning today!',
+                          style: TextStyle(fontSize: 18, color: Colors.grey),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  );
                 }
                 return Listener(
                   onPointerUp: _handlePointerUp,

@@ -83,7 +83,7 @@ class NewsViewState extends State<NewsView> {
                                       Text(
                                         news.newsCategory,
                                         style: const TextStyle(
-                                          fontSize: 12,
+                                          fontSize: 13,
                                           fontFamily: 'Barlow',
                                           color: subHeaderColor,
                                         ),
@@ -92,7 +92,7 @@ class NewsViewState extends State<NewsView> {
                                       Text(
                                         news.newsTitle,
                                         style: const TextStyle(
-                                          fontSize: 15,
+                                          fontSize: 15.5,
                                           fontFamily: 'Merriweather',
                                           fontWeight: FontWeight.bold,
                                           color: textColor,

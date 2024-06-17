@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:diff_match_patch/diff_match_patch.dart';
 import 'package:try_app/src/model/report_model.dart';
 
+import 'package:try_app/src/view/news/news_view.dart';
+import 'package:try_app/src/view/test/task1/task1_view.dart';
+import 'package:try_app/src/view/test/task2/task2_view.dart';
+import 'package:try_app/src/view/test/task3/task3_view.dart';
+import 'package:try_app/src/view/test/task4/task4_view.dart';
+
 class LearningHistoryView extends StatefulWidget {
   final ReportModel report;
 
@@ -41,8 +47,41 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    // Retry logic based on taskType and taskId or newsId
-                    // 적절한 경로와 인수로 Navigator.push 사용
+                    switch (widget.report.taskType) {
+                      case "news":
+                        break;
+                      case "task1":
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Task1View()),
+                        );
+                        break;
+                      case "task2":
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Task2View()),
+                        );
+                        break;
+                      case "task3":
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Task3View()),
+                        );
+                        break;
+                      case "task4":
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Task4View()),
+                        );
+                        break;
+                      default:
+                        // 기본 화면 또는 오류 처리 로직 추가
+                        break;
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF008F9C),
@@ -303,7 +342,7 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
                       Text(
                         tip.feedback,
                         style: const TextStyle(
-                          fontSize: 16,
+                          fontSize: 15.5,
                           fontFamily: 'Barlow',
                           color: Color(0xFF210A3B),
                         ),
