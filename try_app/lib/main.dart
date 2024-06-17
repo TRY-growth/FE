@@ -1,12 +1,12 @@
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import 'package:try_app/src/repository/home_repository.dart';
 
 import 'src/view/auth/login_view.dart';
 
 import 'src/view/base_view.dart';
 
+import 'src/repository/home_repository.dart';
 import 'src/view/home/home_view_model.dart';
 
 import 'src/view/test/test_view.dart';
@@ -66,7 +66,6 @@ class MyApp extends StatelessWidget {
           seedColor: Colors.teal,
           brightness: Brightness.light,
         ),
-        // scaffoldBackgroundColor: Colors.white,
         textTheme: textTheme,
         useMaterial3: true,
       ),

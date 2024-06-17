@@ -55,13 +55,12 @@ class HomeViewState extends State<HomeView>
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 32), // 위아래 패딩만 적용
+            padding: const EdgeInsets.symmetric(vertical: 32),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 32), // 좌우 패딩 적용
+                  padding: const EdgeInsets.symmetric(horizontal: 32),
                   child: Row(
                     children: [
                       Expanded(
@@ -69,7 +68,7 @@ class HomeViewState extends State<HomeView>
                           iconPath: 'assets/images/timer.png',
                           title: 'Test',
                           description:
-                              'Practice English skills in a timed test environment.',
+                              'Practice English\nthrough the\ntest environment',
                         ),
                       ),
                       const SizedBox(width: 16),
@@ -78,7 +77,7 @@ class HomeViewState extends State<HomeView>
                           iconPath: 'assets/images/news.png',
                           title: 'News',
                           description:
-                              'Learn English expressions through the latest news.',
+                              'Learn English\nthrough the\nlatest news',
                         ),
                       ),
                     ],
@@ -86,7 +85,7 @@ class HomeViewState extends State<HomeView>
                 ),
                 const SizedBox(height: 32),
                 const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 48), // 좌우 패딩 적용
+                  padding: EdgeInsets.symmetric(horizontal: 48),
                   child: Row(
                     children: [
                       Expanded(
@@ -99,7 +98,7 @@ class HomeViewState extends State<HomeView>
                       Text(
                         'Learning History',
                         style: TextStyle(
-                          fontSize: 24, // 폰트 크기 24
+                          fontSize: 24,
                           fontWeight: FontWeight.bold,
                           color: Color(0xFF008F9C),
                         ),
@@ -178,7 +177,6 @@ class HomeViewState extends State<HomeView>
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Image.asset(iconPath, height: 55),
-            // const SizedBox(height: 0),
             Text(
               title,
               textAlign: TextAlign.center,
@@ -188,7 +186,6 @@ class HomeViewState extends State<HomeView>
                 color: Color(0xFF210A3B),
               ),
             ),
-            // const SizedBox(height: 7),
             Text(
               description,
               textAlign: TextAlign.center,
@@ -241,7 +238,6 @@ class HomeViewState extends State<HomeView>
           ),
           elevation: 0,
           child: Container(
-            // height: 220,
             width: double.infinity,
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
@@ -260,8 +256,8 @@ class HomeViewState extends State<HomeView>
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(iconPath, height: 77),
-                  const SizedBox(height: 22),
+                  Image.asset(iconPath, height: 75),
+                  const SizedBox(height: 15),
                   Text(
                     taskType,
                     style: TextStyle(
@@ -270,12 +266,12 @@ class HomeViewState extends State<HomeView>
                       color: textColor,
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 9),
                   Text(
                     submitDate,
                     style: TextStyle(fontSize: 12, color: textColor),
                   ),
-                  const SizedBox(height: 32),
+                  const SizedBox(height: 20),
                   _buildScoreIcons(
                       int.tryParse(report.totalFeedback?.score ?? '0') ?? 0),
                 ],
@@ -287,14 +283,13 @@ class HomeViewState extends State<HomeView>
     );
   }
 
-// _buildScoreIcons 함수
   Widget _buildScoreIcons(int score) {
     List<Widget> icons = [];
     for (int i = 0; i < 4; i++) {
       icons.add(Image.asset(
         'assets/images/score.png',
         color: i < score ? null : Colors.grey.shade300,
-        height: 44, // 점수 이미지 크기
+        height: 40, // 점수 이미지 크기
       ));
     }
     return Row(

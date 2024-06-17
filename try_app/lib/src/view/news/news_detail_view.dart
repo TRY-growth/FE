@@ -39,7 +39,6 @@ class NewsDetailView extends StatelessWidget {
           color: const Color(0xFFFFFFFF),
           padding:
               const EdgeInsets.only(left: 37, right: 37, top: 30, bottom: 37),
-          // padding: EdgeInsets.all(37),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

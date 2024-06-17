@@ -21,8 +21,6 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
 
     return Scaffold(
       appBar: AppBar(
-        // title: const Text("Report"),
-        // centerTitle: true,
         automaticallyImplyLeading: true,
       ),
       body: SingleChildScrollView(
@@ -116,7 +114,7 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
       children: [
         Image.asset(
           'assets/images/$score.png',
-          height: 100,
+          height: 150,
         ),
         const SizedBox(height: 16),
         Text(
@@ -124,7 +122,6 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
           style: const TextStyle(
             fontSize: 24,
             fontWeight: FontWeight.bold,
-            // fontFamily: 'Merriweather',
             color: Color(0xFF008F9C),
           ),
         ),
@@ -185,7 +182,6 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
                       Text(
                         feedback.overallFeedback,
                         style: const TextStyle(
-                          // fontWeight: FontWeight.bold,
                           fontFamily: 'Barlow',
                           fontSize: 17,
                           color: Color(0xFF210A3B),
@@ -622,8 +618,6 @@ class LearningHistoryViewState extends State<LearningHistoryView> {
                   color: Colors.black,
                   fontFamily: 'Barlow',
                   fontSize: 17,
-
-                  // fontWeight: FontWeight.bold,
                 ),
               ),
             ],

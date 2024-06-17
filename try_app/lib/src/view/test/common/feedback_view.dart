@@ -123,7 +123,7 @@ class FeedbackViewState extends State<FeedbackView> {
       children: [
         Image.asset(
           'assets/images/$score.png',
-          height: 100,
+          height: 150,
         ),
         const SizedBox(height: 16),
         Text(
@@ -192,7 +192,6 @@ class FeedbackViewState extends State<FeedbackView> {
                       Text(
                         feedback.overallFeedback,
                         style: const TextStyle(
-                          // fontWeight: FontWeight.bold,
                           fontFamily: 'Barlow',
                           fontSize: 17,
                           color: Color(0xFF210A3B),
@@ -629,8 +628,6 @@ class FeedbackViewState extends State<FeedbackView> {
                   color: Colors.black,
                   fontFamily: 'Barlow',
                   fontSize: 17,
-
-                  // fontWeight: FontWeight.bold,
                 ),
               ),
             ],

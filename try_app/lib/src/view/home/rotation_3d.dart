@@ -1,9 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 
-// Takes an x, y or z rotation, in degrees, and rotates. Good for spins & 3D flip effects.
 class Rotation3d extends StatelessWidget {
-  // Degrees to radians constant.
   static const double degrees2Radians = pi / 180;
 
   final Widget child;

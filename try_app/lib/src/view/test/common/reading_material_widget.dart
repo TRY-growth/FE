@@ -15,7 +15,7 @@ class ReadingMaterialWidget extends StatelessWidget {
         Text(
           content,
           style: const TextStyle(
-            fontSize: 18,
+            fontSize: 16,
             fontFamily: 'Barlow',
             letterSpacing: 0.5,
             height: 1.5,

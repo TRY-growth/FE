@@ -96,8 +96,6 @@ class QuestionWidgetState extends State<QuestionWidget> {
         const SizedBox(height: 20),
         Text(
           widget.question,
-          // style: const TextStyle(fontSize: 18),
-
           style: const TextStyle(
             fontSize: 18,
             fontFamily: 'Barlow',
@@ -123,25 +121,27 @@ class QuestionWidgetState extends State<QuestionWidget> {
           ),
         ),
         const SizedBox(height: 32),
-        ElevatedButton(
-          onPressed: () {
-            widget.onSubmit(_controller.text);
-          },
-          style: ElevatedButton.styleFrom(
-            backgroundColor: const Color(
-                0xFF008F9C), // Use the same color as the "Start Learning" button
-            padding: const EdgeInsets.symmetric(horizontal: 94, vertical: 12),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
+        SizedBox(
+          width: double.infinity,
+          child: ElevatedButton(
+            onPressed: () {
+              widget.onSubmit(_controller.text);
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF008F9C),
+              padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 12),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12),
+              ),
             ),
-          ),
-          child: const Text(
-            "Submit Answer",
-            style: TextStyle(
-              fontSize: 18,
-              fontFamily: 'Merriweather',
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
+            child: const Text(
+              "Submit Answer",
+              style: TextStyle(
+                fontSize: 18,
+                fontFamily: 'Merriweather',
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
             ),
           ),
         ),

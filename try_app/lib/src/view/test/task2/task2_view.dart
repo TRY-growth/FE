@@ -87,10 +87,9 @@ class Task2ViewState extends State<Task2View> {
                   isActive: _currentStep == 1,
                 ),
                 Step(
-                  title: const Text("Discussion"),
-                  content: ListeningMaterialWidget(
-                      content: task2ViewModel.currentQuestion!.discussion,
-                      onNext: _nextStep),
+                  title: const Text("Conversation"),
+                  content:
+                      ListeningMaterialWidget(content: "2", onNext: _nextStep),
                   isActive: _currentStep == 2,
                 ),
                 Step(

@@ -38,7 +38,7 @@ class BaseViewState extends State<BaseView> {
             Text(
               _getAppBarTitle(_currentIndex),
               style: const TextStyle(
-                fontSize: 24,
+                fontSize: 20,
                 fontWeight: FontWeight.bold,
                 color: textColor,
                 fontFamily: 'Merriweather',
@@ -61,8 +61,8 @@ class BaseViewState extends State<BaseView> {
       bottomNavigationBar: FluidNavBar(
         icons: [
           FluidNavBarIcon(icon: Icons.timer),
-          FluidNavBarIcon(icon: Icons.local_florist),
-          FluidNavBarIcon(icon: Icons.article),
+          FluidNavBarIcon(icon: Icons.energy_savings_leaf),
+          FluidNavBarIcon(icon: Icons.newspaper),
         ],
         onChange: _handleNavigationChange,
         scaleFactor: 1.5,
@@ -189,7 +189,7 @@ class BaseViewState extends State<BaseView> {
                     alignment: Alignment.centerRight,
                     child: TextButton(
                       onPressed: () {
-                        // 회원탈퇴 로직 추가
+                        // 회원탈퇴
                         Navigator.of(context).pop();
                       },
                       child: const Text(

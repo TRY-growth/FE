@@ -33,7 +33,7 @@ class LoadingView extends StatelessWidget {
               builder: (context) => nextWidget(context, snapshot.data),
             ));
           });
-          return Container(); // Empty container while waiting for navigation
+          return Container();
         }
       },
     );

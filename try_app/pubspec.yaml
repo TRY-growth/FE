@@ -34,8 +34,6 @@ flutter:
     - .env
     - assets/
     - assets/images/
-    - assets/images/test.png
-    - assets/deepgram-asteria-1717651025257.mp3
   fonts:
     - family: Ridibatang
       fonts:

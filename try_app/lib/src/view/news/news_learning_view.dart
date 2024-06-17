@@ -58,22 +58,12 @@ class NewsLearningViewState extends State<NewsLearningView> {
         onStepContinue: _currentStep == 1 ? null : _nextStep,
         steps: [
           Step(
-            title: const Text("Microphone Access",
-                style: TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF210A3B),
-                )),
+            title: const Text("Microphone Access"),
             content: MicrophoneTestWidget(onNext: _nextStep),
             isActive: _currentStep == 0,
           ),
           Step(
-            title: const Text("Question",
-                style: TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF210A3B),
-                )),
+            title: const Text("Question"),
             content: QuestionWidget(
               question: widget.report.newsQuestion!,
               onSubmit: _submitAnswer,

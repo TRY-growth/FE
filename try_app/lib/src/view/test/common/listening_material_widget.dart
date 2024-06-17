@@ -14,16 +14,18 @@ class ListeningMaterialWidget extends StatefulWidget {
 
 class ListeningMaterialWidgetState extends State<ListeningMaterialWidget> {
   late AudioPlayer _audioPlayer;
-  bool _isPlaying = false;
+  bool isPlaying = false;
 
   @override
   void initState() {
     super.initState();
     _audioPlayer = AudioPlayer();
     _audioPlayer.onPlayerComplete.listen((event) {
+      setState(() {
+        isPlaying = false;
+      });
       widget.onNext();
     });
-    _playLocalAudio();
   }
 
   @override
@@ -33,11 +35,31 @@ class ListeningMaterialWidgetState extends State<ListeningMaterialWidget> {
   }
 
   Future<void> _playLocalAudio() async {
-    const audioFilePath = 'assets/deepgram-asteria-1717651025257.mp3';
-    setState(() {
-      _isPlaying = true;
-    });
-    await _audioPlayer.play(AssetSource(audioFilePath));
+    if (isPlaying) {
+      await _audioPlayer.stop();
+      setState(() {
+        isPlaying = false;
+      });
+    } else {
+      String audioFilePath = '${widget.content}.mp3';
+      await _audioPlayer.play(AssetSource(audioFilePath));
+      setState(() {
+        isPlaying = true;
+      });
+    }
+  }
+
+  String getDescription(String content) {
+    switch (content) {
+      case "2":
+        return "Now listen to\na conversation\nbetween two students.";
+      case "3":
+        return "Now listen to\npart of a lecture on the topic\nin a psychology class.";
+      case "4":
+        return "Listen to\npart of a lecture\nin a business class.";
+      default:
+        return "Content not found.";
+    }
   }
 
   @override
@@ -45,21 +67,31 @@ class ListeningMaterialWidgetState extends State<ListeningMaterialWidget> {
     return Column(
       children: [
         const SizedBox(height: 20),
-        const Text(
-          // widget.content,
-          "Reliability vs Features",
-          style: TextStyle(fontSize: 18),
+        Text(
+          getDescription(widget.content),
+          style: const TextStyle(
+            fontSize: 18,
+            fontFamily: 'Barlow',
+            letterSpacing: 0.5,
+            height: 1.5,
+            fontWeight: FontWeight.w500,
+            color: Color(0xFF210A3B),
+            decoration: TextDecoration.none,
+          ),
           textAlign: TextAlign.center,
         ),
         const SizedBox(height: 20),
-        Image.asset('assets/images/test.png'),
-        const SizedBox(height: 20),
-        // _isPlaying
-        //     ? CircularProgressIndicator()
-        //     : ElevatedButton(
-        //         onPressed: _playLocalAudio,
-        //         child: const Text("Replay Audio"),
-        //       ),
+        Container(
+          color: Colors.transparent,
+          padding: const EdgeInsets.all(8.0),
+          child: IconButton(
+            icon: Icon(
+              isPlaying ? Icons.pause : Icons.play_arrow,
+              size: 30,
+            ),
+            onPressed: _playLocalAudio,
+          ),
+        ),
       ],
     );
   }

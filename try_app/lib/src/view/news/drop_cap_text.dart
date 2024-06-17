@@ -2,16 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-enum DropCapMode {
-  /// default
-  inside,
-  upwards,
-  aside,
-
-  /// Does not support dropCapPadding, indentation, dropCapPosition and custom dropCap.
-  /// Try using DropCapMode.upwards in combination with dropCapPadding and forceNoDescent=true
-  baseline
-}
+enum DropCapMode { inside, upwards, aside, baseline }
 
 enum DropCapPosition {
   start,
@@ -141,13 +132,11 @@ class DropCapText extends StatelessWidget {
 
     int rows = ((capHeight - indentation.dy) / lineHeight).ceil();
 
-    // DROP CAP MODE - UPWARDS
     if (mode == DropCapMode.upwards) {
       rows = 1;
       sideCrossAxisAlignment = CrossAxisAlignment.end;
     }
 
-    // BUILDER
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
       double boundsWidth = constraints.maxWidth - capWidth;
@@ -155,7 +144,6 @@ class DropCapText extends StatelessWidget {
 
       int charIndexEnd = data.length;
 
-      //int startMillis = new DateTime.now().millisecondsSinceEpoch;
       if (rows > 0) {
         textPainter.layout(maxWidth: boundsWidth);
         double yPos = rows * lineHeight;
@@ -167,15 +155,12 @@ class DropCapText extends StatelessWidget {
       } else {
         charIndexEnd = dropCapChars;
       }
-      //int totMillis = new DateTime.now().millisecondsSinceEpoch - startMillis;
 
-      // DROP CAP MODE - LEFT
       if (mode == DropCapMode.aside) charIndexEnd = data.length;
 
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          // Text(totMillis.toString() + ' ms'),
           Row(
             textDirection: dropCapPosition == null ||
                     dropCapPosition == DropCapPosition.start

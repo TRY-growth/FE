@@ -78,9 +78,9 @@ class Task4ViewState extends State<Task4View> {
                   isActive: _currentStep == 0,
                 ),
                 Step(
-                  title: const Text("Listening Material"),
+                  title: const Text("Lecture"),
                   content: ListeningMaterialWidget(
-                    content: task4ViewModel.currentQuestion!.lecture,
+                    content: "4",
                     onNext: _nextStep,
                   ),
                   isActive: _currentStep == 1,
