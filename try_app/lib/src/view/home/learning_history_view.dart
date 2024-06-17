@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:diff_match_patch/diff_match_patch.dart';
 import 'package:try_app/src/model/report_model.dart';
 
-import 'package:try_app/src/view/news/news_view.dart';
 import 'package:try_app/src/view/test/task1/task1_view.dart';
 import 'package:try_app/src/view/test/task2/task2_view.dart';
 import 'package:try_app/src/view/test/task3/task3_view.dart';

@@ -46,10 +46,11 @@ class QuestionWidgetState extends State<QuestionWidget> {
       _isRecording = true;
     });
 
-    final serverUrl = dotenv.env['DEEPGRAM_SERVER_URL']!;
     final apiKey = dotenv.env['DEEPGRAM_API_KEY']!;
 
-    channel = IOWebSocketChannel.connect(Uri.parse(serverUrl),
+    channel = IOWebSocketChannel.connect(
+        Uri.parse(
+            'wss://api.deepgram.com/v1/listen?encoding=linear16&sample_rate=16000&language=en-US&punctuate=true'),
         headers: {'Authorization': 'Token $apiKey'});
 
     channel.stream.listen((event) async {
