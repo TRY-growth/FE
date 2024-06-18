@@ -2,7 +2,7 @@
 
 A [Flutter](https://flutter.dev) application designed to assist in preparing for English speaking tests (TOEFL) using the [OpenAI GPT API](https://openai.com/api/).
 
-> This repository focuses on the front-end implementation. For the Spring Boot server and AI prompt engineering, please refer to the [back-end repository](https://github.com/TRY-growth/public-Backend).
+> This repository focuses on the front-end implementation. For the Spring Boot server and AI prompt engineering, please refer to the [back-end repository](https://github.com/TRY-growth/BE_public).
 
 ## 📁 Project Structure
 
